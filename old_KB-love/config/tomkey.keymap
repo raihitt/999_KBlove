@@ -1,0 +1,317 @@
+/*
+ * Tomkey Keyboard - Windows/Mac切り分け検証版
+ *
+ * レイヤー構成:
+ * Layer 0: デフォルト（変更なし）
+ * Layer 1: スクロールレイヤー（元のまま）
+ * Layer 2: Windows用レイヤー
+ * Layer 3: Mac用レイヤー
+ * Layer 4: 調整レイヤー
+ * Layer 5-6: その他機能レイヤー
+ *
+ * テスト用コメント追加 - commit/pushテスト
+ * コミットテスト実行 - 2024年12月30日
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+
+// OS設定を日本語キーボードのまま使用するための変換定義
+
+#define JP_DQUOTE       AT                // "
+#define JP_AMPERSAND    CARET             // &
+#define JP_QUOTE        AMPERSAND         // '
+#define JP_EQUAL        UNDER             // =
+#define JP_CARET        EQUAL             // ^
+#define JP_YEN          0x89              // ¥
+#define JP_PLUS         COLON             // +
+#define JP_TILDE        PLUS              // ~
+#define JP_PIPE         LS(0x89)          // |
+#define JP_AT           LEFT_BRACKET      // @
+#define JP_COLON        SINGLE_QUOTE      // :
+#define JP_ASTERISK     DOUBLE_QUOTES     // *
+#define JP_BACKQUOTE    LEFT_BRACE        // `
+#define JP_UNDERSCORE   LS(0x87)          // _
+#define JP_LBRACKET     RIGHT_BRACKET     // [
+#define JP_RBRACKET     BACKSLASH         // ]
+#define JP_LPAREN       ASTERISK          // (
+#define JP_RPAREN       LEFT_PARENTHESIS  // )
+#define JP_LBRACE       RIGHT_BRACE       // {
+#define JP_RBRACE       PIPE              // }
+#define JP_KANA         LANGUAGE_1        // かな
+#define JP_EISU         LANGUAGE_2        // 英数
+#define JP_HANZEN       GRAVE             // 半角/全角
+
+/ {
+    behaviors {
+        // Mod-Morph定義（日本語記号対応）
+
+        mo2: mod-morph_2 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp N2>, <&kp JP_DQUOTE>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo3: mod-morph_3 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp N3>, <&kp HASH>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo6: mod-morph_6 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp N6>, <&kp JP_AMPERSAND>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo7: mod-morph_7 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp N7>, <&kp JP_QUOTE>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo8: mod-morph_8 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp N8>, <&kp JP_LPAREN>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo9: mod-morph_9 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp N9>, <&kp JP_RPAREN>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo0: mod-morph_0 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp N0>, <&kp JP_EQUAL>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_minus: mod-morph_minus {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp MINUS>, <&kp JP_CARET>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_caret: mod-morph_caret {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp CARET>, <&kp JP_TILDE>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_at: mod-morph_at {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp AT>, <&kp JP_AT>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_colon: mod-morph_colon {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp COLON>, <&kp JP_COLON>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_semicolon: mod-morph_semicolon {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SEMICOLON>, <&kp JP_ASTERISK>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_backquote: mod-morph_backquote {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp GRAVE>, <&kp JP_BACKQUOTE>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_lbracket: mod-morph_lbracket {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_BRACKET>, <&kp JP_LBRACKET>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_rbracket: mod-morph_rbracket {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp RIGHT_BRACKET>, <&kp JP_RBRACKET>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_backslash: mod-morph_backslash {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp BACKSLASH>, <&kp JP_UNDERSCORE>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_comma: mod-morph_comma {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp COMMA>, <&kp JP_LBRACE>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_dot: mod-morph_dot {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp DOT>, <&kp JP_RBRACE>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        mo_slash: mod-morph_slash {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SLASH>, <&kp JP_PIPE>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        // Windowsデバイス接続切り替え（BT0）
+
+        bt_sel_win: bt_sel_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 0>;
+        };
+
+        // Macデバイス接続切り替え（BT1）
+
+        bt_sel_mac: bt_sel_mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 1>;
+        };
+
+        // Windows切り替え（レイヤーOFF → 接続切り替え → WindowsレイヤーON）
+
+        switch_to_win: switch_to_win {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&to 0 &bt BT_SEL 0 &to 2>;
+        };
+
+        // Mac切り替え（レイヤーOFF → 接続切り替え → MacレイヤーON）
+
+        switch_to_mac: switch_to_mac {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&to 0 &bt BT_SEL 1 &to 3>;
+        };
+    };
+
+    macros {
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+&lt 1 Q  &lt 5 W       &kp E          &kp R  &kp T                                 &kp Y        &kp U  &kp I     &kp O     &lt 6 P
+&kp A    &kp S         &kp D          &kp D  &kp F  &sys_reset      &sys_reset     &kp G        &kp H  &kp J     &kp K     &kp L
+&kp Z    &kp X         &kp C          &kp V  &kp B  &kp TAB         &trans         &kp N        &kp M  &mkp MB2  &mkp MB1  &mo 1
+&mo 2    &kp LEFT_ALT  &kp RIGHT_GUI  &mo 2  &mo 3  &kp SPACE       &kp BACKSPACE  &lt 1 ENTER                             &mo 6
+            >;
+        };
+
+        // Layer 1: スクロールレイヤー（日本語入力切り替え対応）
+
+        SCROLL {
+            bindings = <
+&trans          &mo 2   &trans  &trans  &trans                                     &kp LG(A)      &kp LG(W)       &trans          &kp LG(T)        &kp MINUS
+&sys_reset      &trans  &trans  &trans  &trans  &kp LG(F)               &kp LG(C)  &kp LS(LG(V))  &trans          &kp UP_ARROW    &trans           &sys_reset
+&bootloader     &trans  &trans  &trans  &trans  &trans                  &kp LG(C)  &kp LG(V)      &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &bootloader
+&switch_to_mac  &trans  &trans  &mo 1   &mo 6   &kp LC(LEFT_ARROW)      &kp LANG2  &kp LANG1                                                       &switch_to_win
+            >;
+        };
+
+        // Layer 2: Windows用レイヤー（日本語入力切り替え対応）
+
+        WINDOWS {
+            bindings = <
+&kp A      &kp B         &kp C          &kp D      &kp E                                    &kp LG(Y)    &kp LG(U)  &kp LG(I)  &kp LG(O)  &kp LG(P)
+&kp LG(Z)  &kp LG(X)     &kp LG(C)      &kp LG(V)  &kp LG(B)  &kp LG(F)      &kp LG(F)      &kp LG(G)    &kp LG(H)  &kp LG(J)  &kp LG(K)  &kp LG(L)
+&kp LG(Q)  &kp LG(S)     &kp LG(D)      &kp LG(F)  &kp LG(G)  &kp LG(C)      &kp LG(C)      &kp LG(H)    &kp LG(J)  &kp LG(K)  &mkp MB2   &mkp MB1
+&mo 4      &kp LEFT_ALT  &kp RIGHT_GUI  &mo 2      &mo 6      &kp SPACE      &kp BACKSPACE  &lt 1 ENTER   &kp LANG2  &kp LANG1
+            >;
+        };
+
+        // Layer 3: Mac用レイヤー（日本語入力切り替え対応）
+
+        MAC {
+            bindings = <
+&kp N1     &kp N2        &kp N3         &kp N4     &kp N5                                   &kp LA(Y)    &kp LA(U)  &kp LA(I)  &kp LA(O)  &kp LA(P)
+&kp LA(Z)  &kp LA(X)     &kp LA(C)      &kp LA(V)  &kp LA(B)  &kp LA(F)      &kp LA(F)      &kp LA(G)    &kp LA(H)  &kp LA(J)  &kp LA(K)  &kp LA(L)
+&kp LA(Q)  &kp LA(S)     &kp LA(D)      &kp LA(F)  &kp LA(G)  &kp LA(C)      &kp LA(C)      &kp LA(H)    &kp LA(J)  &kp LA(K)  &mkp MB2   &mkp MB1
+&mo 4      &kp LEFT_ALT  &kp RIGHT_GUI  &mo 4      &mo 3      &kp SPACE      &kp BACKSPACE  &lt 1 ENTER   &kp LANG2  &kp LANG1
+            >;
+        };
+
+        // Layer 4: 調整レイヤー
+
+        ADJUST {
+            bindings = <
+&kp F1   &kp F2   &kp F3  &kp F4  &kp F5                      &kp F6     &kp F7  &kp F8  &kp F9  &kp F10
+&kp F11  &kp F12  &trans  &trans  &trans  &trans      &trans  &mo_comma  &trans  &trans  &trans  &trans
+&trans   &trans   &trans  &trans  &trans  &trans      &trans  &trans     &trans  &trans  &trans  &trans
+&trans   &trans   &trans  &trans  &trans  &trans      &trans  &trans                             &trans
+            >;
+        };
+
+        // Layer 5: 数字・記号レイヤー（日本語入力切り替え対応）
+
+        NUMBER {
+            bindings = <
+&mo2     &mo3       &mo6    &mo8    &mo9                              &mo_slash  &trans  &trans  &mo_slash      &mo_colon
+&kp N4   &kp N5     &kp N6  &trans  &trans  &trans      &mo_lbracket  &mo7       &trans  &trans  &mo_semicolon  &kp N7
+&kp N8   &kp N9     &trans  &trans  &trans  &trans      &mo_minus     &trans     &trans  &trans  &mo0           &mo_comma
+&mo_dot  &mo_minus  &trans  &trans  &trans  &trans      &kp LANG2     &kp LANG1
+            >;
+        };
+
+        // Layer 6: システム管理レイヤー（日本語入力切り替え対応）
+
+        SYSTEM {
+            bindings = <
+&bootloader  &sys_reset  &switch_to_win  &switch_to_mac  &bootloader                      &bootloader  &sys_reset  &trans  &trans  &bootloader
+&bt BT_CLR   &trans      &trans          &trans          &sys_reset   &trans      &trans  &sys_reset   &trans      &trans  &trans  &trans
+&trans       &trans      &trans          &trans          &trans       &trans      &trans  &trans       &trans      &trans  &trans  &trans
+&trans       &trans      &trans          &trans          &trans       &kp LANG2   &kp LANG1
+            >;
+        };
+    };
+};

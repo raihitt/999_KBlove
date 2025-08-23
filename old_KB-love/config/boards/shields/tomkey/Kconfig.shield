@@ -1,0 +1,5 @@
+config SHIELD_TOMKEY_R
+    def_bool $(shields_list_contains,tomkey_R)
+
+config SHIELD_TOMKEY_L
+    def_bool $(shields_list_contains,tomkey_L)

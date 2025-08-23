@@ -1,0 +1,8 @@
+file_format: "1"
+id: tomkey
+name: tomkey
+type: shield
+url: https://github.com/pukuhei/tomkey.git
+requires: [seeeduino_xiao_ble]
+features:
+  - keys
