@@ -39,7 +39,7 @@
 
 ## Architecture
 
-``mermaid
+```mermaid
 graph TB
     A[CSV入力ファイル] --> B[銘柄コードリーダー]
     B --> C[統一データ生成]
@@ -156,7 +156,7 @@ CREATE TABLE scraping_data (
 ### 1. 統合フェッチャーアーキテクチャ
 
 #### UnifiedFetcher Interface
-``typescript
+```typescript
 interface UnifiedFetcher {
   name: string;
   fetch<T>(field: string, code: string, options?: FetchOptions): Promise<T | undefined>;
@@ -172,7 +172,7 @@ interface UnifiedFetcher {
 ### 2. 統合キャッシュシステム
 
 #### IntegratedCacheSystem
-``typescript
+```typescript
 interface IntegratedCacheSystem {
   // キャッシュ対象フィールド（優先度順）
   CACHE_FIELDS: {
@@ -500,7 +500,7 @@ class QoderErrorOptimizer {
 ### コマンドライン実行
 
 ### 統合キャッシュシステム実行
-``bash
+```bash
 # データ生成
 npm run gen
 
