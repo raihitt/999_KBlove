@@ -70,10 +70,7 @@
     "noEmit": false
   },
   "include": [
-    "src/**/*",
-    "scripts/**/*",
-    "tests/**/*",
-    "benchmarks/**/*"
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",

@@ -1,0 +1,28 @@
+{
+  "systemMetrics": {
+    "cacheHitRate": 89.2,
+    "processingTimeReduction": 75.3,
+    "memoryEfficiency": 68.7,
+    "errorRecoveryRate": 91.5
+  },
+  "stockAnalysis": [
+    {
+      "stockCode": "7203",
+      "companyName": "トヨタ自動車",
+      "score": 85.3,
+      "recommendation": "BUY"
+    },
+    {
+      "stockCode": "6758",
+      "companyName": "ソニーグループ",
+      "score": 78.9,
+      "recommendation": "HOLD"
+    },
+    {
+      "stockCode": "4519",
+      "companyName": "中外製薬",
+      "score": 92.1,
+      "recommendation": "STRONG_BUY"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "lastOptimized": "2025-08-24T02:35:44.619Z",
+  "ttlSettings": {
+    "stock-price": 300,
+    "financial-data": 3600,
+    "company-info": 86400,
+    "market-data": 1800,
+    "news-data": 7200,
+    "analysis-result": 10800,
+    "static-data": 604800
+  },
+  "optimizationMetadata": {
+    "optimizedTypes": [],
+    "totalImprovementExpected": 0,
+    "recommendations": [
+      "定期的なTTL最適化の実行（週次推奨）",
+      "アクセスログ取得によるより精密な最適化の検討"
+    ]
+  }
+}
