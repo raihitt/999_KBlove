@@ -1,0 +1,123 @@
+{
+  "name": "metaegg-system",
+  "version": "1.0.0",
+  "description": "高配当銘柄分析システム（MetaEgg）- 効率化最適化対応",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "dev": "node --loader ts-node/esm src/index.ts",
+    "start": "node dist/index.js",
+    
+    "gen": "node --loader ts-node/esm src/cli/generate-unified.ts",
+    "enrich": "node --loader ts-node/esm src/cli/enrich-unified.ts",
+    "evaluate": "node --loader ts-node/esm src/cli/evaluate-timeframe.ts",
+    "report": "node --loader ts-node/esm src/cli/generate-report.ts",
+    
+    "pipeline:offline": "npm run gen && npm run enrich && npm run evaluate && npm run report",
+    "pipeline:online": "npm run gen && npm run enrich:online && npm run evaluate && npm run report",
+    "pipeline:mvp": "npm run gen && npm run enrich:mvp && npm run evaluate:mvp && npm run report:mvp",
+    
+    "scene:scan": "npm run gen && npm run enrich:scan",
+    "scene:safety": "npm run gen && npm run enrich:safety && npm run evaluate:safety",
+    "scene:full": "npm run pipeline:offline",
+    "scene:quality": "npm run gen && npm run enrich:quality && npm run evaluate:quality && npm run report:quality",
+    
+    "ns:init": "node --loader ts-node/esm src/cli/namespace-init.ts",
+    "scene:ns:full": "npm run ns:init && npm run scene:full",
+    
+    "optimization:cache": "node scripts/integrated-cache-system.js",
+    "optimization:mapping": "node scripts/fix-field-mapping.js",
+    "optimization:ttl": "node scripts/optimize-cache-ttl.js",
+    "optimization:dashboard": "node scripts/test-dashboard-display.js",
+    "optimization:all": "node scripts/run-comprehensive-dashboard-optimizer.js",
+    
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:rules": "node --loader ts-node/esm src/test/rules.test.ts",
+    "test:snap": "node --loader ts-node/esm src/test/snapshot.test.ts",
+    "test:basic-scraping": "node --loader ts-node/esm src/test/basic-scraping.test.ts",
+    "test:integrated-fetcher": "node --loader ts-node/esm src/test/integrated-fetcher.test.ts",
+    "test:performance": "node --loader ts-node/esm src/test/performance.test.ts",
+    
+    "api:dev": "node --loader ts-node/esm src/api/server-refactored.ts",
+    "api:start": "node dist/api/server-refactored.js",
+    
+    "benchmark": "node --loader ts-node/esm src/benchmark/performance.ts",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts"
+  },
+  "keywords": [
+    "stock-analysis",
+    "dividend-stocks",
+    "financial-data",
+    "scraping",
+    "investment",
+    "performance-optimization",
+    "metaegg"
+  ],
+  "author": "MetaEgg Development Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
+    "fs-extra": "^11.1.1",
+    "iconv-lite": "^0.6.3",
+    "lodash": "^4.17.21",
+    "sqlite3": "^5.1.6",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "compression": "^1.7.4",
+    "rate-limiter-flexible": "^3.0.8",
+    "redis": "^4.6.10",
+    "bull": "^4.12.2",
+    "cluster": "^0.7.7",
+    "worker_threads": "^1.0.0",
+    "p-limit": "^4.0.0",
+    "p-queue": "^7.4.1",
+    "fast-csv": "^4.3.6",
+    "stream-json": "^1.8.0",
+    "lru-cache": "^10.0.1",
+    "node-cache": "^5.1.2",
+    "ioredis": "^5.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "@types/lodash": "^4.14.199",
+    "@types/fs-extra": "^11.0.2",
+    "@types/express": "^4.17.18",
+    "@types/cors": "^2.8.14",
+    "@types/compression": "^1.7.3",
+    "@types/jest": "^29.5.5",
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "eslint": "^8.50.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "prettier": "^3.0.3",
+    "nodemon": "^3.0.1",
+    "playwright": "^1.38.0",
+    "@types/benchmark": "^2.1.3",
+    "benchmark": "^2.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/metaegg/system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/metaegg/system/issues"
+  },
+  "homepage": "https://github.com/metaegg/system#readme"
+}
