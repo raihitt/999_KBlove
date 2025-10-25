@@ -1,0 +1,76 @@
+{
+  "timestamp": "2025-09-01T03:33:36.549Z",
+  "executionTime": 32,
+  "analysis": {
+    "timestamp": "2025-09-01T03:33:36.521Z",
+    "phase": "maximum_power_execution",
+    "components": {
+      "fetcherSystem": {
+        "status": "error",
+        "error": "ENOENT: no such file or directory, scandir '/Users/raihi/local_repo/src/fetchers/core'"
+      },
+      "serverSystem": {
+        "status": "error",
+        "error": "ENOENT: no such file or directory, scandir '/Users/raihi/local_repo/src/servers'"
+      },
+      "dataPipeline": {
+        "status": "error",
+        "error": "ENOENT: no such file or directory, scandir '/Users/raihi/local_repo/data/processed'"
+      },
+      "cacheSystem": {
+        "status": "partial",
+        "components": [
+          {
+            "component": "src/fetchers/core/CacheManager.ts",
+            "exists": false,
+            "optimized": false
+          },
+          {
+            "component": "src/fetchers/core/LightweightFetcher.ts",
+            "exists": false,
+            "optimized": false
+          },
+          {
+            "component": "src/fetchers/core/ResponseHandler.ts",
+            "exists": false,
+            "optimized": false
+          }
+        ]
+      }
+    }
+  },
+  "strategy": {
+    "timestamp": "2025-09-01T03:33:36.522Z",
+    "priority": [
+      "server_integration_test"
+    ],
+    "actions": [
+      {
+        "type": "test_server_integration",
+        "description": "サーバー起動とAPI統合テスト"
+      }
+    ]
+  },
+  "executionLog": [
+    {
+      "timestamp": "2025-09-01T03:33:36.549Z",
+      "status": "success",
+      "message": "サーバー起動とAPI統合テスト"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "fetcher_system",
+      "description": "Context7最適化フェッチャーシステムの完全実装",
+      "action": "フェッチャー統合と最適化"
+    },
+    {
+      "priority": "medium",
+      "category": "server_system",
+      "description": "UnifiedMetaEggServerの起動確認",
+      "action": "サーバー起動テストと統合確認"
+    }
+  ],
+  "nextSteps": []
+}

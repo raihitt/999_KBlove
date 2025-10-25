@@ -1,0 +1,18 @@
+---
+alwaysApply: false
+---
+# Codex-Centric Workflow
+
+## Rule: Use Codex for Heavy Lifting
+- Use GPT-5 Codex (via Vibe Kanban) for complex implementations
+- Reserve Cursor's free queries for quick checks and minor edits
+- Limit Cursor AI usage to <50 queries/month
+
+## Rule: OpenSpec First
+- Always create OpenSpec proposal before implementation
+- Validate: `openspec validate <change-id>`
+- Generate tasks: `openspec show <change-id>`
+
+## Rule: Batch Operations
+- Group related changes to minimize AI queries
+- Use Codex for batch refactoring instead of multiple Cursor requests

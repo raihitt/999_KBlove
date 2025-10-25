@@ -1,0 +1,7 @@
+- `python -m venv .venv && source .venv/bin/activate` — create and activate the Python 3.9+ virtual environment.
+- `pip install -r requirements.txt` — install pandas, requests, beautifulsoup4 and other runtime/dev dependencies.
+- `pytest` — run the unit and integration test suite against recorded fixtures.
+- `python -m irbank_scraper.cli --stock-code 6758 --output data/irbank_6758.csv` — execute the end-to-end scraper pipeline.
+- `openspec list` / `openspec list --specs` — inspect active OpenSpec changes and canonical specs.
+- `openspec validate <change-id> --strict` — validate change proposals before sharing.
+- `rg <pattern>` — preferred fast full-text search within the repo.

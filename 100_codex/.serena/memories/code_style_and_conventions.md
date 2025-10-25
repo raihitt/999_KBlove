@@ -1,0 +1,7 @@
+- Follow PEP 8 with 4-space indentation and add type hints to public functions.
+- Use snake_case for modules/functions, PascalCase for classes, and ALL_CAPS for constants.
+- Centralize logging via `logging.getLogger(__name__)` and emit info/debug appropriately.
+- Organize scraper code under `irbank-scraper/src/` with mirrored tests under `irbank-scraper/tests/`.
+- Keep HTTP selectors in `selectors.py`, derived metrics in `metrics.py`, and store HTML fixtures in `tests/fixtures/html/`.
+- Specs live in `openspec/`; changes require proposals/tasks/spec deltas under `openspec/changes/<id>/` following OpenSpec formatting (`## ADDED|MODIFIED|...`, `#### Scenario:` blocks).
+- Generated CSV output goes to a gitignored `data/` directory; avoid committing sensitive data (use `.env`).
