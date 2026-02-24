@@ -1,9 +1,36 @@
-## description
+## 概要
 - このキーボードは無線分割式 40% 19mm トラックボール内蔵のキーボードになります。
   ![tomkey keyboard](img/tomkeyimg.png)
 
 ## ビルドガイド
-- https://github.com/pukuhei/tomkey/blob/main/build_guide/build_guide.md
+- `build_guide/build_guide.md`
+
+## ZMKファーム更新（要点）
+
+- 詳細手順: `build_guide/build_guide.md` の「ZMKファームウェア更新手順」
+- 基本フロー
+  1. フォーク先へ設定変更を push
+  2. GitHub Actions の成功したビルド成果物(zip)を取得
+  3. 左右のマイコンをそれぞれリセット 2 回でブートローダーモードにする
+  4. 左右それぞれ対応する `uf2` をコピーして再起動を待つ
+- 使用する `uf2`
+  - 初期化: `settings_reset-seeeduino_xiao_ble-zmk.uf2`
+  - 左手: `tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2`
+  - 右手: `tomkey_R-seeeduino_xiao_ble-zmk.uf2`
+
+## コンフィグ変更ガイド（推奨フロー）
+
+- 変更計画の起点: `docs/roadmap/README.md`
+- 基本方針
+  1. いきなり `keymap` は触らない
+  2. 先に AML 設定を低リスク項目から段階適用する
+  3. 各ステップで `git diff` と実機確認を行う
+  4. AML の整合確認後に `keymap` 反映へ進む
+- 詳細ドキュメント
+  - `docs/README.md`
+  - `docs/aml/README.md`
+  - `docs/keymap/README.md`
+
 ## スペック
 - ファームウェア
   - ZMK を使用しています
@@ -29,7 +56,7 @@
   - 上側が左手のバッテリー残量
   - 下側が右手のバッテリー残量
 
-## oled の切り替えについて
+## OLED の切り替えについて
 
 - デフォルトでは us 配列の mac に適した配置になっております
 - また oled も mac に併せてありますので、windows の方は以下の設定を n に指定することで表示が切り替わります
@@ -38,6 +65,8 @@
 
 ## キーマップについて
 
+- 変更着手前に `docs/roadmap/README.md` を確認してください
+- `keymap` 編集は AML 設定の段階適用・整合確認が完了してから実施してください
 - ZMKstudio にて確認・編集を行なってください
 
   - https://zmk.studio/
