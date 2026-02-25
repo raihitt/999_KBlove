@@ -22,12 +22,14 @@
 };
 
 &zip_temp_layer {
-    require-prior-idle-ms = <400>;
+    /* マウスボタン(18:MB1, 19:MB3, 20:MB2) と 修飾キー(34:Ctrl, 35:Alt, 36:Cmd, 37:Shift) のみAMLを維持 */
+    /* それ以外のキー（通常タイピングキーなど）を押すと、即座にAMLが解除される */
+    excluded-positions = <18 19 20 34 35 36 37>;
 };
 
 &trackball_listener {
     status = "okay";
-    input-processors = <&zip_temp_layer 1 1000>;
+    input-processors = <&zip_temp_layer 1 100000>;
 
     scroll {
         layers = <2>;
