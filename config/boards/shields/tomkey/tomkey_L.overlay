@@ -21,9 +21,13 @@
     };
 };
 
+&zip_temp_layer {
+    require-prior-idle-ms = <400>;
+};
+
 &trackball_listener {
     status = "okay";
-    input-processors = <&zip_temp_layer 1 400>;
+    input-processors = <&zip_temp_layer 1 1000>;
 
     scroll {
         layers = <2>;
