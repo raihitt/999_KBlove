@@ -17,13 +17,13 @@
 
         combo_mb3 {
             timeout-ms = <50>;
-            key-positions = <20 19>;
+            key-positions = <19 18>;
             bindings = <&mkp MB3>;
         };
 
         combo_scroll {
             timeout-ms = <50>;
-            key-positions = <19 18>;
+            key-positions = <20 19>;
             bindings = <&mo 2>;
         };
     };
