@@ -14,6 +14,7 @@
 3. Stage 3（実行手順）: `docs/keymap/03_rebuild_steps.md`
 4. レイヤー構成: [05_layer_functions.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/05_layer_functions.md)
 5. 将来の拡張案: [06_future_ideas.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/06_future_ideas.md)
+6. ZMK Studio JP 記号表: [07_zmk_studio_jp_symbols.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/07_zmk_studio_jp_symbols.md)
 
 ## AML前提の確認
 - 入口: `docs/aml/overview.md`
