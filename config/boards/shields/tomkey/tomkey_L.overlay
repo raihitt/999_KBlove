@@ -23,8 +23,9 @@
 
 &zip_temp_layer {
     /* マウスボタン(18:MB1, 19:MB3, 20:MB2) と 修飾キー(34:Ctrl, 35:Alt, 36:Cmd, 37:Shift) のみAMLを維持 */
+    /* I(7) O(8): I+O縦スクロールコンボ用に外してAMLを維持 */
     /* それ以外のキー（通常タイピングキーなど）を押すと、即座にAMLが解除される */
-    excluded-positions = <18 19 20 34 35 36 37>;
+    excluded-positions = <7 8 18 19 20 34 35 36 37>;
 };
 
 &trackball_listener {
@@ -34,6 +35,12 @@
     scroll {
         layers = <2>;
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 1 16>, <&zip_xy_to_scroll_mapper>;
+    };
+
+    scroll_v {
+        /* layer 7 (縦スクロール専用): X軸を極小化し縦方向のみスクロール */
+        layers = <7>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_x_scaler 1 16>, <&zip_xy_scaler 1 16>, <&zip_xy_to_scroll_mapper>;
     };
 };
 

@@ -26,6 +26,13 @@
             key-positions = <20 19>;
             bindings = <&mo 2>;
         };
+
+        combo_vscroll {
+            /* I + O 同時押し → 縦スクロール専用レイヤー */
+            timeout-ms = <50>;
+            key-positions = <7 8>;
+            bindings = <&mo 7>;
+        };
     };
 
     keymap {
@@ -91,6 +98,17 @@
 &kp LG(LS(Z))  &trans     &kp LC(C)  &trans     &trans  &trans      &trans  &trans         &trans           &trans        &trans        &trans
 &kp LG(Z)      &kp LG(X)  &kp LG(C)  &kp LG(V)  &trans  &trans      &trans  &trans         &trans           &trans        &trans        &trans
 &trans         &trans     &trans     &trans     &trans  &trans      &trans  &trans                                                      &trans
+            >;
+        };
+
+        VSCROLL {
+            /* 縦スクロール専用レイヤー (layer 7): I+O同時押しで起動 */
+            /* 実機的には全キーを透過し、overlayのscroll_vブロックがトラックボールにX軸抑制をかける */
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
         };
     };
