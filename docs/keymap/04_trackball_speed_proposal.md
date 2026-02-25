@@ -7,13 +7,13 @@
 ## 調査結果
 
 1. **_archive（レガシー環境: `legacy/old_KB-love`）の調査**
-   過去の設定ファイル `_archive/legacy/old_KB-love/config/boards/shields/tomkey/tomkey_R.overlay` を確認したところ、トラックボールの速度設定（`cpi`）として明示的に `400` が指定されていました。
+   過去の設定ファイル `_archive/legacy/old_KB-love/config/boards/shields/tomkey/tomkey_R.overlay` を確認したところ、トラックボールの速度設定（`cpi`）として明示的に `400` が指定されていましたが、実機検証の結果、現在の環境では `800` 前後が適正であると判断しました。
 
    ```dts
    &trackball {
        status = "okay";
        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-       cpi = <400>; // ← 過去の設定値は400
+       cpi = <800>; // ← 調整後の設定値
        evt-type = <INPUT_EV_REL>;
        x-input-code = <INPUT_REL_X>;
        y-input-code = <INPUT_REL_Y>;
@@ -37,7 +37,7 @@
 
 ## 解決策の提案
 
-扱い慣れた元の速度に戻すため、現在の本番環境 `config/boards/shields/tomkey/tomkey_R.overlay` に対して `cpi = <400>;` の設定を追加・付与することを提案します。
+扱い慣れた元の速度に戻すため、現在の本番環境 `config/boards/shields/tomkey/tomkey_R.overlay` に対して `cpi = <800>;` の設定を追加・付与することを提案します。
 
 ### 変更点
 `config/boards/shields/tomkey/tomkey_R.overlay` を以下の通り修正します。
@@ -46,11 +46,11 @@
  &trackball {
      status = "okay";
  	  irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+    cpi = <400>;
++    cpi = <800>;
      evt-type = <INPUT_EV_REL>;
      x-input-code = <INPUT_REL_X>;
      y-input-code = <INPUT_REL_Y>;
  };
 ```
 
-これにより、以前の動作感覚（CPI: 400）に合わせた直感的なマウス速度に戻すことが可能です。
+これにより、以前の動作感覚（CPI: 400）をベースに、現在の解像度や環境に合わせた適正なマウス速度（CPI: 800）に戻すことが可能です。
