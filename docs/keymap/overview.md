@@ -1,31 +1,26 @@
-# keymap運用ガイド（Stage別）
+# keymap運用ガイド（2026-02 改訂版）
 
-このドキュメントは入口です。詳細は Stage ごとのファイルを参照してください。
+このディレクトリは、tomkey のキー配置と操作体験の最適化に関する資料を管理します。
 
-## 結論
+## 📖 インデックス
 
-- 恒久変更は `config/tomkey.keymap` に反映して管理する
-- ZMK Studio は試行用、確定後に keymap へ転記する
-- 変更時は AML 関連の `overlay` / `conf` 依存も確認する
-- `MOUSE` / `SCROLL` は `Tomkey` レイアウト依存の固有値として扱う
+日常の操作確認には **01** を、追加設定には **02** を参照してください。
 
-1. Stage 1（参照の事実確認）: `docs/keymap/01_evidence.md`
-2. Stage 2（現行との差分判断）: `docs/keymap/02_comparison.md`
-3. Stage 3（実行手順）: `docs/keymap/03_rebuild_steps.md`
-4. レイヤー構成: [05_layer_functions.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/05_layer_functions.md)
-5. 将来の拡張案: [06_future_ideas.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/06_future_ideas.md)
-6. ZMK Studio JP 記号表: [07_zmk_studio_jp_symbols.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/07_zmk_studio_jp_symbols.md)
-7. キーポジション一覧: [08_key_positions.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/08_key_positions.md)
+1. **[01_Layer_and_Combo_Reference.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/01_Layer_and_Combo_Reference.md)**
+   - 全レイヤーの機能、コンボ定義、および物理キーポジション対応図。
+2. **[02_ZMK_Studio_JP_Symbols.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/02_ZMK_Studio_JP_Symbols.md)**
+   - 日本語 Windows 環境で ZMK Studio を使う際の特殊記号対応表。
+3. **[03_Future_Expansion.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/03_Future_Expansion.md)**
+   - 将来的な拡張（編集キー系、記号系コンボ等）のアイデア集。
+4. **[04_Refactoring_History.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/04_Refactoring_History.md)**
+   - 2026年2月のリファクタリング（AML/Quick-tap/Combo実装）の背景と履歴。
+5. **[05_Trackball_Settings.md](file:///Users/raihi/local_repo/999_KBlove/docs/keymap/05_Trackball_Settings.md)**
+   - CPI、軸反転、スクロール倍率等のハードウェア的な固定設定。
 
-## AML前提の確認
-- 入口: `docs/aml/overview.md`
+---
 
-## 使い分け早見表
+## 💡 メンテナンスの原則
 
-| 観点 | `config/tomkey.keymap` 編集 | ZMK Studio 編集 |
-|---|---|---|
-| 変更履歴（Git） | 残しやすい | 残りにくい |
-| 再現性（別PC/将来） | 高い | 低め（運用依存） |
-| 試行速度 | 低〜中 | 高い |
-| 大きな構成変更（レイヤー設計） | 向いている | 向いていないことがある |
-| 緊急の一時変更 | 手間がかかる | 向いている |
+- 基本設定は `config/tomkey.keymap` を正とする。
+- ZMK Studio は試行用に使用し、確定後は keymap ファイルへ転記する。
+- 物理構造に変更があった場合は `01_Layer_and_Combo_Reference.md` のポジション図を更新すること。

@@ -23,9 +23,11 @@ docs/
 
 3. keymap（後段）
 - 入口: `docs/keymap/overview.md`
-- Stage 1（参照エビデンス）: `docs/keymap/01_evidence.md`
-- Stage 2（比較判断）: `docs/keymap/02_comparison.md`
-- Stage 3（実行手順）: `docs/keymap/03_rebuild_steps.md`
+- 01 レイヤー・コンボ・配置リファレンス: `docs/keymap/01_Layer_and_Combo_Reference.md`
+- 02 ZMK Studio JP 記号表: `docs/keymap/02_ZMK_Studio_JP_Symbols.md`
+- 03 将来の拡張案: `docs/keymap/03_Future_Expansion.md`
+- 04 リファクタリング履歴: `docs/keymap/04_Refactoring_History.md`
+- 05 トラックボール固定設定: `docs/keymap/05_Trackball_Settings.md`
 
 ## Archive
 
