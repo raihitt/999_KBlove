@@ -1,0 +1,34 @@
+# keymap運用ガイド（Stage別）
+
+このドキュメントは入口です。詳細は Stage ごとのファイルを参照してください。
+
+## 結論
+
+- 恒久変更は `config/tomkey.keymap` に反映して管理する
+- ZMK Studio は試行用、確定後に keymap へ転記する
+- 変更時は AML 関連の `overlay` / `conf` 依存も確認する
+- `MOUSE` / `SCROLL` は `Tomkey` レイアウト依存の固有値として扱う
+
+## 各 Stage の読み方
+
+1. Stage 1（参照の事実確認）
+   - `docs/keymap/stage1_monokey_evidence.md`
+2. Stage 2（現行との差分判断）
+   - `docs/keymap/stage2_tomkey_comparison.md`
+3. Stage 3（実行手順）
+   - `docs/keymap/stage3_rebuild_steps.md`
+4. AML前提の確認
+   - `docs/aml/README.md`（入口）
+   - `docs/aml/stage1_current_state.md`
+   - `docs/aml/stage2_change_points.md`
+   - `docs/aml/stage3_rebuild_steps.md`
+
+## 使い分け早見表
+
+| 観点 | `config/tomkey.keymap` 編集 | ZMK Studio 編集 |
+|---|---|---|
+| 変更履歴（Git） | 残しやすい | 残りにくい |
+| 再現性（別PC/将来） | 高い | 低め（運用依存） |
+| 試行速度 | 低〜中 | 高い |
+| 大きな構成変更（レイヤー設計） | 向いている | 向いていないことがある |
+| 緊急の一時変更 | 手間がかかる | 向いている |
