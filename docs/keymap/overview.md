@@ -12,16 +12,16 @@
 ## 各 Stage の読み方
 
 1. Stage 1（参照の事実確認）
-   - `docs/keymap/stage1_monokey_evidence.md`
+   - `docs/keymap/01_evidence.md`
 2. Stage 2（現行との差分判断）
-   - `docs/keymap/stage2_tomkey_comparison.md`
+   - `docs/keymap/02_comparison.md`
 3. Stage 3（実行手順）
-   - `docs/keymap/stage3_rebuild_steps.md`
+   - `docs/keymap/03_rebuild_steps.md`
 4. AML前提の確認
-   - `docs/aml/README.md`（入口）
-   - `docs/aml/stage1_current_state.md`
-   - `docs/aml/stage2_change_points.md`
-   - `docs/aml/stage3_rebuild_steps.md`
+   - `docs/aml/overview.md`（入口）
+   - `docs/aml/01_current_state.md`
+   - `docs/aml/02_change_points.md`
+   - `docs/aml/03_rebuild_steps.md`
 
 ## 使い分け早見表
 

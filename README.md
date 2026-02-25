@@ -20,7 +20,7 @@
 
 ## コンフィグ変更ガイド（推奨フロー）
 
-- 変更計画の起点: `docs/roadmap/README.md`
+- 変更計画の起点: `docs/roadmap/roadmap.md`
 - 基本方針
   1. いきなり `keymap` は触らない
   2. 先に AML 設定を低リスク項目から段階適用する
@@ -65,7 +65,7 @@
 
 ## キーマップについて
 
-- 変更着手前に `docs/roadmap/README.md` を確認してください
+- 変更着手前に `docs/roadmap/roadmap.md` を確認してください
 - `keymap` 編集は AML 設定の段階適用・整合確認が完了してから実施してください
 - ZMKstudio にて確認・編集を行なってください
 

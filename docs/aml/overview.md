@@ -11,11 +11,11 @@
 ## 各 Stage の読み方
 
 1. Stage 1（現行仕様と依存の事実確認）
-   - `docs/aml/stage1_current_state.md`
+   - `docs/aml/01_current_state.md`
 2. Stage 2（改変ポイント整理）
-   - `docs/aml/stage2_change_points.md`
+   - `docs/aml/02_change_points.md`
 3. Stage 3（実行手順）
-   - `docs/aml/stage3_rebuild_steps.md`
+   - `docs/aml/03_rebuild_steps.md`
 
 ## 既存運用上の要点
 

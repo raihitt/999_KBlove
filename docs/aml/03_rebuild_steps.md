@@ -3,16 +3,19 @@
 ## 手順0: 前提確認
 
 1. 現行仕様を確認する
-- `docs/aml/stage1_current_state.md`
+- `docs/aml/01_current_state.md`
 2. 改変候補を確認する
-- `docs/aml/stage2_change_points.md`
+- `docs/aml/02_change_points.md`
 3. 固有値制約を固定する
 - `MOUSE` / `SCROLL` と AML切替先レイヤー番号は変更しない
 
 ## 手順1: 小さく変更
 
 1. 変更対象を1項目に絞る（例: タイムアウトのみ）
-2. `before -> after` を明記して差分を作る
+2. 変更内容を具体的にテキスト化する
+- 対象ファイルと設定値
+- `Before -> After` の値の変化
+- **変更による確認ポイント（Before/Afterで挙動がどう変わるべきか）**
 
 ## 手順2: 実装
 
@@ -28,7 +31,8 @@
 2. コミットメッセージに以下を記載
 - 変更理由
 - 影響ファイル
-- 期待する実機確認内容
+- `Before -> After` の内容
+- **変更確認ポイント（この変更で何が解決/変化するかの具体的な確認方法）**
 3. `git push` して GitHub Actions のビルドを開始する
 
 ## 手順4: 検証（ビルド後）

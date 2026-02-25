@@ -34,13 +34,30 @@
   - ![bat01](../img/build/188769_0.jpg)
   - ![bat02](../img/build/188775_0.jpg)
 
-## ファームウェアの焼き方
+## ZMKファームウェア更新手順
 
-- マイコンの左上のリセットスイッチを細い棒などで 2 回連続押すと、PC で外部ストレージとして認識されます
-- 完全組み立て品の場合は、リセットスイッチカバーの突起が出ているのでそれを 2 回押してください
-  - ![maikon01](../img/build/190841.jpg.jpg)
-- 本リポジトリをフォークしてもらって、keymapEditor やコードエディタで編集しフォークしたリポジトリに push 後、GithubAction が自動で走るので完了後にビルドされたファームを左右のマイコンにそれぞれドラッグ＆ドロップでコピーしてください
-  - zip ファイルの中身はこちらになります
-  - マイコン初期化:settings_reset-seeeduino_xiao_ble-zmk.uf2
-  - 左:tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2
-  - 右:tomkey_R-seeeduino_xiao_ble-zmk.uf2
+### 1. 事前準備
+
+- 本リポジトリをフォークして、`main` ブランチへ変更を push します
+- push 後に GitHub Actions のビルドが自動実行されます
+- 成功したワークフローから成果物(zip)をダウンロードします
+
+成果物に含まれる `uf2` は以下です。
+- 初期化用: `settings_reset-seeeduino_xiao_ble-zmk.uf2`
+- 左手用: `tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2`
+- 右手用: `tomkey_R-seeeduino_xiao_ble-zmk.uf2`
+
+### 2. 通常更新（推奨）
+
+1. 左手側マイコンをブートローダーモードに入れます
+   - リセットスイッチを 2 回連続で押すと、PCで外部ストレージとして認識されます
+   - 完成品の場合は、リセットスイッチカバーの突起を 2 回押してください
+   - ![maikon01](../img/build/190841.jpg.jpg)
+2. 左手側のストレージに `tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2` をコピーします
+3. 右手側も同様にブートローダーモードへ入れ、`tomkey_R-seeeduino_xiao_ble-zmk.uf2` をコピーします
+4. 両側とも自動再起動したら更新完了です
+
+### 3. 初期化が必要な場合のみ
+
+1. 片側ずつブートローダーモードにして `settings_reset-seeeduino_xiao_ble-zmk.uf2` をコピーします
+2. 初期化後に、通常更新の手順で左手用/右手用の `uf2` を再度書き込みます
