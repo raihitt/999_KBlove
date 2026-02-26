@@ -1,6 +1,8 @@
 #include "tomkey.dtsi"
 #include <dt-bindings/zmk/input_transform.h>
 #include <input/processors.dtsi>
+#include <input/processors/runtime-input-processor.dtsi>
+#include <behaviors/battery_history_request.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 / {
@@ -29,6 +31,8 @@
     require-prior-idle-ms = <400>;
 };
 
+/* trackball_listener は Peripheral (R) 側 overlay で runtime-input-processor 方式として定義済み */
+/* Central (L) 側では trackball_split 経由の受信のみ行う */
 &trackball_listener {
     status = "okay";
     input-processors = <&zip_temp_layer 1 5000>;

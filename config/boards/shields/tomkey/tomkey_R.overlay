@@ -1,6 +1,8 @@
 #include "tomkey.dtsi"
 #include <input/processors.dtsi>
+#include <input/processors/runtime-input-processor.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
+#include <behaviors/battery_history_request.dtsi>
 
 &default_transform {
     col-offset = <6>;
@@ -52,13 +54,21 @@
     };
 };
 
-&trackball {
+&trackball_listener {
     status = "okay";
-	  irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-    cpi = <800>;
-    evt-type = <INPUT_EV_REL>;
-    x-input-code = <INPUT_REL_X>;
-    y-input-code = <INPUT_REL_Y>;
+    device = <&trackball>;
+    /* runtime-input-processor 経由でトラックボール速度を DYA Studio からリアルタイム変更可能 */
+    input-processors = <&mouse_runtime_input_processor>;
+
+    scroller {
+        /* layer 2 (SCROLL): カーソル移動をスクロールに変換 */
+        layers = <2>;
+        input-processors = <
+            &zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)
+            &zip_xy_to_scroll_mapper
+            &scroll_runtime_input_processor
+        >;
+    };
 };
 
 &trackball_split {

@@ -4,10 +4,11 @@
 
 ```text
 docs/
-├── roadmap/   # 変更方針・実施順序
-├── aml/       # AML設定の Stage 資料（先行）
-├── keymap/    # keymap反映の Stage 資料（後段）
-└── _archive/  # 旧版ドキュメント退避
+├── roadmap/      # 変更方針・実施順序
+├── aml/          # AML設定の Stage 資料（先行）
+├── keymap/       # keymap反映の Stage 資料（後段）
+├── zya_studio/   # ZYA / DYA Studio 対応ドキュメント
+└── _archive/     # 旧版ドキュメント退避
 ```
 
 ## 推奨の読む順番
@@ -32,3 +33,10 @@ docs/
 ## Archive
 
 - 入口: `docs/_archive/README.md`
+
+## ZYA / DYA Studio 対応
+
+- 入口: `docs/zya_studio/README.md`
+- ロードマップ: `docs/zya_studio/00_roadmap.md`
+- 作業ログ: `docs/zya_studio/01_work_log.md`
+- 参考資料: `docs/zya_studio/02_references.md`

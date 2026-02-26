@@ -1,23 +1,35 @@
 manifest:
   remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
-    - name: mctechnology17
-      url-base: https://github.com/mctechnology17
+    - name: cormoran
+      url-base: https://github.com/cormoran
     - name: badjeff
       url-base: https://github.com/badjeff
-    - name: englmaxi
-      url-base: https://github.com/englmaxi
     - name: te9no
       url-base: https://github.com/te9no
   projects:
+    # ZMK: DYA Studio 用カスタム RPC サブシステム付き cormoran fork
     - name: zmk
-      remote: zmkfirmware
-      revision: v0.3
+      remote: cormoran
+      revision: v0.3-branch+dya
       import: app/west.yml
+    # DYA Studio モジュール
+    - name: zmk-module-ble-management
+      remote: cormoran
+      revision: main
+    - name: zmk-module-battery-history
+      remote: cormoran
+      revision: main
+    - name: zmk-module-settings-rpc
+      remote: cormoran
+      revision: main
+    - name: zmk-module-runtime-input-processor
+      remote: cormoran
+      revision: main
+    # トラックボールドライバー (badjeff)
     - name: zmk-pmw3610-driver
       remote: badjeff
       revision: zmk-0.3
+    # ドングルディスプレイ
     - name: zmk-dongle-display
       remote: te9no
       revision: main
