@@ -25,10 +25,19 @@
         };
 
         combo_vscroll {
-            /* I + O 同時押し → 縦スクロール専用レイヤー */
+            /* K + L 同時押し → 縦スクロール専用レイヤー */
             timeout-ms = <50>;
-            key-positions = <7 8>;
+            key-positions = <19 20>;
             bindings = <&mo 7>;
+        };
+    };
+
+    behaviors {
+        aml: aml {
+            compatible = "zmk,behavior-aml";
+            #binding-cells = <0>;
+            layers = <1>;       // 初期レイヤー: MOUSE
+            timeout-ms = <1000>;
         };
     };
 
