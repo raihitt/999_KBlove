@@ -25,9 +25,10 @@
 
 &zip_temp_layer {
     /* マウスボタン(31:Comma, 32:Dot) と 修飾キー(34:Ctrl, 35:Alt, 36:Cmd, 37:Shift) のみAMLを維持 */
-    /* K(19) L(20): K+L縦スクロールコンボ用に外してAMLを維持 */
+    /* K, L(19, 20): 通常キーとしてAML解除対象に戻す */
+    /* ,(31) .(32): マウスボタン/コンボ用としてAMLを維持 */
     /* それ以外のキー（通常タイピングキーなど）を押すと、即座にAMLが解除される */
-    excluded-positions = <19 20 31 32 34 35 36 37>;
+    excluded-positions = <31 32 34 35 36 37>;
     require-prior-idle-ms = <400>;
 };
 
