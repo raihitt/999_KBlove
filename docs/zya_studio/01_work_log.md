@@ -35,6 +35,30 @@
 
 ---
 
+# 修正完了と検証 (Runtime Input Processor 認識エラー対応)
+
+## 実施内容
+
+ZMK Studio (DYA) 上で「ランタイム入力プロセッサが見つかりません」と表示される問題を修正しました。
+
+- **RIP 設定の移動**: トラックボールの感度やスクロール速度を制御する Runtime Input Processor (RIP) プロセッサを、Peripheral (R) 側から Central (L) 側に移動しました。
+- **Central 制御の有効化**: これにより、PC に直接接続されている Central 側から DYA Studio がプロセッサを認識・制御できるようになりました。
+- **クリーンアップ**: Peripheral 側に残っていた不要な Central 用 KConfig 設定（MOUSE, BATTERY_LEVEL_PROXY 等）を削除しました。
+
+## ビルド結果 (最新)
+
+- **Run ID**: [22447924746](https://github.com/raihitt/999_KBlove/actions/runs/22447924746)
+- **Status**: ✅ Success
+- **対象**: `seeeduino_xiao_ble` (tomkey_L / tomkey_R)
+
+## 検証手順
+
+1. [GitHub Actions](https://github.com/raihitt/999_KBlove/actions/runs/22447924746) から最新の firmware をダウンロードし、両側にフラッシュしてください。
+2. DYA Studio (https://studio.dya.cormoran.works/) にログインしてください。
+3. **「トラックボール設定」タブ** を開き、感度や動作の設定項目が表示され、変更がリアルタイムに反映されることを確認してください。
+
+---
+
 ## 2026-02-26 — 実装フェーズ
 
 ### やったこと（コミット: fc6c429）
@@ -53,16 +77,16 @@
 - [x] GitHub Actions のビルド成功を確認
 - [x] 実機書き込み完了
 - [x] DYA Studio 接続成功（アンロック完了）
+- [x] RIP 認識エラーの修正（Central へのプロセッサ移動）
+- [ ] DYA Studio での設定変更の動作確認（ユーザー）
 
 ---
 
-## 2026-02-26 — 最終確認・トラブルシューティング
+## 2026-02-27 — Runtime Input Processor 対応
 
-### やったこと（コミット: 2b4fd54）
-- `tomkey_R.overlay` の修正
-  - ZYA対応時に誤って削除されていた `&trackball` の有効化ブロック（`status = "okay"`）を復元。
-  - ビルドエラー `__device_dts_ord_157 undeclared` を解消。
-- DYA Studio への接続
-  - `&studio_unlock` キー（Layer 6 + Y）により、Studio のアンロックに成功。
-  - 正常にログインできることを確認。
+### やったこと（コミット: 068ed80）
+- **RIP プロセッサの移動**: 以前の設定では感度調整プロセッサが Peripheral 側にのみ存在していたため、Central 側の DYA Studio から認識できなかった問題を修正。
+- **L/R Overlay 修正**: Central (L) に RIP プロセッサを追加し、Peripheral (R) からは二重適用防止のため削除。
+- **ビルド成功**: 直近のビルド（Run 22447924746）で成功を確認。
+
 
