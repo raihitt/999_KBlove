@@ -17,7 +17,7 @@
 
         combo_mb3 {
             timeout-ms = <50>;
-            key-positions = <41 42>;
+            key-positions = <31 32>;
             bindings = <&mkp MB3>;
         };
 
@@ -43,9 +43,9 @@
 
         MOUSE {
             bindings = <
-&trans         &trans         &trans            &trans          &trans                                           &trans           &trans    &trans        &mkp MB1    &mkp MB2
+&trans         &trans         &trans            &trans          &trans                                           &trans           &trans    &trans        &trans      &trans
 &trans         &trans         &trans            &trans          &trans       &trans           &trans             &trans           &trans    &trans        &trans      &trans
-&trans         &trans         &trans            &trans          &trans       &trans           &trans             &trans           &trans    &trans        &trans      &trans
+&trans         &trans         &trans            &trans          &trans       &trans           &trans             &trans           &trans    &mkp MB1      &mkp MB2    &trans
 &kp LCTRL      &kp LEFT_ALT   &kp LEFT_COMMAND  &kp LEFT_SHIFT  &trans       &trans           &trans             &mo 3                                                &trans
             >;
         };
