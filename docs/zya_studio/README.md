@@ -14,11 +14,11 @@ tomkey を [DYA Studio](https://studio.dya.cormoran.works/) に対応させる�
 
 | STEP | 内容 | 状態 |
 |---|---|---|
-| 1 | `west.yml` 書き換え（cormoran ZMK + モジュール追加） | ⬜ 未着手 |
-| 2 | `.github/workflows/build.yml` 更新 | ⬜ 未着手 |
-| 3 | `.conf` ファイルへ Kconfig 追加（Central / Peripheral） | ⬜ 未着手 |
-| 4 | `tomkey_R.overlay` トラックボール listener 移植 | ⬜ 未着手 |
-| 5 | `tomkey_L.overlay` include 追加 | ⬜ 未着手 |
-| 6 | `tomkey.keymap` へ `&studio_unlock` 追加 | ⬜ 未着手 |
-| 7 | ビルド & 書き込み | ⬜ 未着手 |
-| 8 | DYA Studio 接続確認 | ⬜ 未着手 |
+| 1 | `west.yml` 書き換え（cormoran ZMK + モジュール追加） | ✅ 完了 |
+| 2 | `.github/workflows/build.yml` 更新 | ✅ 完了 |
+| 3 | `.conf` ファイルへ Kconfig 追加（Central / Peripheral） | ✅ 完了 |
+| 4 | `tomkey_R.overlay` トラックボール listener 移植 | ✅ 完了 |
+| 5 | `tomkey_L.overlay` include 追加 | ✅ 完了 |
+| 6 | `tomkey.keymap` へ `&studio_unlock` 追加 | ✅ 完了 |
+| 7 | ビルド & 書き込み | ✅ 完了 |
+| 8 | DYA Studio 接続確認 | ✅ 完了 |

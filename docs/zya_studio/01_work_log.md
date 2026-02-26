@@ -34,4 +34,35 @@
 → `00_roadmap.md` の STEP 1（`west.yml` 書き換え）から着手予定
 
 ---
-<!-- 以降のエントリは作業を進めるたびに追記 -->
+
+## 2026-02-26 — 実装フェーズ
+
+### やったこと（コミット: fc6c429）
+
+| ファイル | 変更内容 |
+|---|---|
+| `config/west.yml` | cormoran fork (v0.3-branch+dya) に変更 / DYA モジュール4本追加 |
+| `.github/workflows/build.yml` | cormoran ワークフローに切り替え |
+| `tomkey_L.conf` | DYA Studio Central 用 Kconfig 追加（BLE管理・バッテリー履歴・Settings RPC・runtime-input-processor・フリーズ対策）/ LOCKING n→y |
+| `tomkey_R.conf` | DYA Studio Peripheral 用 Kconfig 追加（バッテリー履歴・Settings RPC・Splitリレー）/ LOCKING n→y |
+| `tomkey.keymap` | DYA include 3本追加 / `&studio_unlock` を layer_6 の BT_PRV と差し替え |
+| `tomkey_R.overlay` | `trackball_listener` を `runtime-input-processor` 方式に移植（scroller は layer 2） |
+| `tomkey_L.overlay` | DYA Studio include 追加・コメント整理 |
+
+### 次のアクション
+- [x] GitHub Actions のビルド成功を確認
+- [x] 実機書き込み完了
+- [x] DYA Studio 接続成功（アンロック完了）
+
+---
+
+## 2026-02-26 — 最終確認・トラブルシューティング
+
+### やったこと（コミット: 2b4fd54）
+- `tomkey_R.overlay` の修正
+  - ZYA対応時に誤って削除されていた `&trackball` の有効化ブロック（`status = "okay"`）を復元。
+  - ビルドエラー `__device_dts_ord_157 undeclared` を解消。
+- DYA Studio への接続
+  - `&studio_unlock` キー（Layer 6 + Y）により、Studio のアンロックに成功。
+  - 正常にログインできることを確認。
+
