@@ -25,10 +25,11 @@
         };
 
         combo_vscroll {
-            /* , + . 同時押し → 縦スクロール専用レイヤー */
+            /* , + . (RCLK + LCLK) 同時押し → 縦スクロール専用レイヤー */
             timeout-ms = <50>;
             key-positions = <31 32>;
             bindings = <&mo 7>;
+            layers = <0 1>;
         };
     };
 
