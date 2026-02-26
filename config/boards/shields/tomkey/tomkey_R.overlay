@@ -66,8 +66,8 @@
 &trackball_listener {
     status = "okay";
     device = <&trackball>;
-    /* runtime-input-processor 経由でトラックボール速度を DYA Studio からリアルタイム変更可能 */
-    input-processors = <&mouse_runtime_input_processor>;
+    /* Peripheral 側では RIP を使用せず、Central 側で一括制御する */
+
 
     scroller {
         /* layer 2 (SCROLL): カーソル移動をスクロールに変換 */

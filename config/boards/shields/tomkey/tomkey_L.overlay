@@ -35,11 +35,11 @@
 /* Central (L) 側では trackball_split 経由の受信のみ行う */
 &trackball_listener {
     status = "okay";
-    input-processors = <&zip_temp_layer 1 5000>;
+    input-processors = <&zip_temp_layer 1 5000>, <&mouse_runtime_input_processor>;
 
     scroll {
         layers = <2>;
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 1 16>, <&zip_xy_to_scroll_mapper>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>, <&zip_xy_scaler 1 16>, <&zip_xy_to_scroll_mapper>, <&scroll_runtime_input_processor>;
     };
 
     scroll_v {
