@@ -78,7 +78,24 @@ ZMK Studio (DYA) 上で「ランタイム入力プロセッサが見つかりま
 - [x] 実機書き込み完了
 - [x] DYA Studio 接続成功（アンロック完了）
 - [x] RIP 認識エラーの修正（Central へのプロセッサ移動）
-- [ ] DYA Studio での設定変更の動作確認（ユーザー）
+
+- [x] DYA Studio での設定変更の動作確認（ユーザー）
+- [ ] DYA Studio への BLE 接続成功（ユーザー）
+
+---
+
+## 2026-02-27 — DYA Studio BLE 接続不可の対応
+
+### 現象
+USB 接続はできるが、BLE (Web Bluetooth) 接続が DYA Studio から行えない。
+
+### 対応内容
+- `tomkey_L.conf` に `CONFIG_ZMK_BLE_EXPERIMENTAL_FEATURES=y` を追加。
+- Web Bluetooth から ZMK Studio の GATT サービスが正しく認識されるように修正。
+
+### 次のアクション
+- [ ] ビルド完了後、実機に書き込み。
+- [ ] 一度ペアリングを解除し、再ペアリングしてから DYA Studio (BLE) への接続を確認。
 
 ---
 
