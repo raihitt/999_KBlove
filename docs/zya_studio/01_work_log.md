@@ -84,18 +84,26 @@ ZMK Studio (DYA) 上で「ランタイム入力プロセッサが見つかりま
 
 ---
 
-## 2026-02-27 — DYA Studio BLE 接続不可の対応
+### 2026-02-28 — DYA Studio BLE 接続不可の対応 (Retry)
 
-### 現象
-USB 接続はできるが、BLE (Web Bluetooth) 接続が DYA Studio から行えない。
+#### 現象
+前回の対応（`EXPERIMENTAL_FEATURES`）でも「User Cancelled the connection attempt」と表示され、接続に失敗する。
 
-### 対応内容
-- `tomkey_L.conf` に `CONFIG_ZMK_BLE_EXPERIMENTAL_FEATURES=y` を追加。
-- Web Bluetooth から ZMK Studio の GATT サービスが正しく認識されるように修正。
+#### 原因調査
+`cormoran/zmk` のソースコードを調査。以下のことが判明：
+- Studio の GATT サービスは**暗号化された読み書き**を要求する。
+- そのため、OS レベルでのセキュアなペアリング（ボンディング）が不完全だと、ブラウザ側からサービスを叩いた瞬間に接続が拒否される。
+- 明示的な `CONFIG_ZMK_STUDIO_RPC=y` および `CONFIG_ZMK_STUDIO_TRANSPORT_BLE=y` が必要な可能性がある。
 
-### 次のアクション
+#### 対応内容
+- `tomkey_L.conf` に Studio RPC および BLE トランスポートの明示的な有効化フラグを追加。
+- アンロック時にダイレクトアドバタイジングを行う `CONFIG_ZMK_STUDIO_LOCK_BLE_DIRECT_ADVERTISING_ON_UNLOCK=y` を追加。
+- 「クリーンペアリング」の手順を提示。
+
+#### 次のアクション
 - [ ] ビルド完了後、実機に書き込み。
-- [ ] 一度ペアリングを解除し、再ペアリングしてから DYA Studio (BLE) への接続を確認。
+- [ ] キーボード側 `&bt BT_CLR` ＋ PC 側 Bluetooth デバイス削除を行い、再ペアリングを実施。
+- [ ] DYA Studio (BLE) 接続を確認。
 
 ---
 
