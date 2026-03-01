@@ -350,6 +350,12 @@ west build -b seeeduino_xiao_ble -- -DSHIELD=tomkey_R
 3. **BLE 接続時**: `&studio_unlock` キーを押した状態で BT 接続 → Studio から認識されるか確認
 4. トラックボール速度・AML タイムアウト・スクロール感度が Studio UI から変更できることを確認
 
+> **⚠️ MacOS での BLE 接続に関する注意 (重要)**
+> macOS の仕様上、ブラウザ (Web Bluetooth) からキーボード等の HID デバイスへの Bluetooth 接続はセキュリティ機能によりOSレベルでブロックされます。
+> DYA Studio は Web アプリ専用であるため、**Mac 上からは BLE 経由で接続することができません**（"User cancelled the connection attempt" エラーとなり即座に弾かれます）。
+> したがって Mac 環境で DYA Studio を利用する場合は **必ず USB 接続** を行ってください。
+> （※ Windows, Linux, Android 等、Web Bluetooth と HID の制限仕様が異なる OS では BLE 接続が可能です）
+
 ---
 
 ## リスク・注意事項
