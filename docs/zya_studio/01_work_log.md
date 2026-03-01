@@ -139,20 +139,32 @@ ZMK Studio (DYA) 上で「ランタイム入力プロセッサが見つかりま
 
 ## 2026-03-01 — キーマップの全面的更新 (DYA Studio 画像準拠)
 
-### やったこと
-- `img/DYA/` 配下の 8 枚のスクリーンショットを参考に、`config/tomkey.keymap` を全面的に書き換えた。
-- **レイヤー名の変更**: `Layer_0`, `1-mouse`, `2-scroll`, `3-ctl`, `4-number`, `5-function`, `6-markdown`, `Layer_7` とし、DYA Studio の UI と一致させた。
-- **キー割当の同期**:
-    - 日本語キーボード特有の記号 (`JP_CARET`, `JP_COLON` 等) や特殊なショートカットを画像通りに配置。
-    - マウスボタンやスクロール、カーソルキーの配置を修正。
-- **実装の詳細**:
-    - `Layer_0` に `&mt LCTRL JP_CARET` や `&mt LSHFT JP_COLON` を導入。
-    - `3-ctl` レイヤーに `LS(LC(V))` や `LG(V)` などの高度なショートカットを配置。
-    - `5-function` レイヤーに `bootloader`, `sys_reset`, `bt BT_SEL` などを配置。
+### 2026-03-01 — キーマップ修正とビルドエラー解消
 
-### 次のアクション
-- [x] キーマップの書き換え完了
-- [x] 作業ログの更新
-- [ ] ビルドと実機確認 (ユーザー)
+#### やったこと
+- `img/DYA/` の画像に基づき `config/tomkey.keymap` を全面的に更新。
+- 更新後に発生した GitHub Actions のビルドエラー（Run #206〜#209）を段階的に解消。
+
+#### 修正した主なエラー原因
+1. **レイヤー名命名規則**:
+   - `Layer_0` や `1-mouse` などの名前が Device Tree のノード名制約（英字開始）に抵触していたため、すべて小文字・英字開始（`layer_0`, `mouse_layer` 等）に統一。
+2. **無効なキーコード指定**:
+   - 日本語キー用の `JP_KANA` / `JP_EISU` が未定義の `LANGUAGE_1/2` を参照していたのを `LANG1/2` に修正。
+   - `VOL_UP/DN` を標準の `C_VOL_UP/DN` に修正。
+   - 定義のない `JP_MINUS` を標準の `MINUS` に置換。
+3. **キー配列の数（Array Length Mismatch）**:
+   - `scroll_layer` と `ctl_layer` で定義されているキーの数が、期待される 43個 に対して 44個 になっていたため、末尾の不要な `&trans` を削除。
+4. **構文の重複**:
+   - 編集ミスによりファイルの末尾に `bindings` ブロックが重複していた箇所をクリーンアップ。
+
+#### ビルド結果 (最終)
+- **Run ID**: [#210](https://github.com/raihitt/999_KBlove/actions/runs/22544258778)
+- **Status**: ✅ Success
+- **コミット**: `c338435` (volume keycode fix) および `a312262` (array length fix)
+
+#### 次のアクション
+- [x] ビルド成功の確認
+- [ ] 実機への書き込みと動作確認（ユーザー）
+- [ ] DYA Studio 上でのキーマップ・AML・トラックボール設定の反映確認
 
 
