@@ -70,16 +70,19 @@
     keymap {
         compatible = "zmk,keymap";
 
+    keymap {
+        compatible = "zmk,keymap";
+
         layer_0 {
             bindings = <
 &lt 2 Q              &kp W         &kp E             &kp R           &kp T                                                            &kp Y            &kp U     &kp I      &kp O     &lt 5 P
 &mt LCTRL JP_CARET  &kp S         &kp D             &kp F           &kp G              &kp JP_CARET       &kp BACKSLASH              &kp H            &kp J     &kp K      &kp L     &kp ENTER
-&mt LSHFT JP_COLON  &kp X         &kp C             &kp V           &kp B              &kp JP_COLON       &kp JP_CARET               &kp N            &kp M     &mkp MB2   &mkp MB1  &lt 2 SLASH
+&mt LSFT JP_COLON   &kp X         &kp C             &kp V           &kp B              &kp JP_COLON       &kp JP_CARET               &kp N            &kp M     &mkp MB2   &mkp MB1  &lt 2 SLASH
 &lt 3 ESCAPE        &kp LEFT_ALT  &kp LEFT_COMMAND  &kp LEFT_SHIFT  &mt LEFT_SHIFT TAB &kp SPACE          &lt 3 BACKSPACE            &mo 4                                           &lt 6 ESCAPE
             >;
         };
 
-        1-mouse {
+        mouse_layer {
             bindings = <
 &trans         &trans         &trans            &trans          &trans                                               &trans           &trans    &trans    &trans    &trans
 &trans         &trans         &trans            &trans          &trans          &trans            &trans             &trans           &trans    &trans    &trans    &trans
@@ -88,25 +91,25 @@
             >;
         };
 
-        2-scroll {
+        scroll_layer {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans    &kp LC(W)  &trans    &trans    &kp JP_MINUS
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans    &trans     &trans    &kp UP    &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans    &kp LEFT   &kp DOWN  &kp RIGHT &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &jp_kana  &jp_eisu                       &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &kp JP_KANA &kp JP_EISU                       &trans
             >;
         };
 
-        3-ctl {
+        ctl_layer {
             bindings = <
 &trans  &trans  &trans  &kp LC(G)      &kp LC(T)                                  &kp LC(W)        &kp LC(T)      &trans  &kp LG(LEFT)  &kp LG(RIGHT)
 &trans  &trans  &trans  &kp LC(F)      &kp LC(F)      &kp LS(LC(V))  &trans       &kp LC(A)        &kp LC(PG_UP)  &trans  &trans        &kp LA(A)
 &trans  &trans  &trans  &trans         &trans         &kp LG(V)      &trans       &kp LG(G)        &kp LC(PG_DN)  &trans  &trans        &kp LG(L)
-&trans  &trans  &trans  &mt LSHFT LC(X) &kp LC(C)      &kp LC(V)      &trans       &kp LS(LC(N))    &kp LC(N)                            &trans
+&trans  &trans  &trans  &mt LSFT LC(X) &kp LC(C)      &kp LC(V)      &trans       &kp LS(LC(N))    &kp LC(N)                            &trans
             >;
         };
 
-        4-number {
+        num_layer {
             bindings = <
 &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_9)  &kp LS(NUMBER_0)                             &kp LS(SLASH)  &kp LS(NUMBER_1)  &trans         &kp SLASH    &kp JP_EQUAL
 &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp JP_LBRACKET   &kp JP_RBRACKET   &trans            &trans  &kp LS(NUMBER_2)  &kp LS(NUMBER_1)  &trans         &trans       &trans
@@ -115,7 +118,7 @@
             >;
         };
 
-        5-function {
+        fun_layer {
             bindings = <
 &kp LC(NUMBER_1)  &trans  &trans  &trans        &bootloader                           &bootloader      &bt BT_SEL 0  &bt BT_SEL 1  &trans  &trans
 &kp LS(LA(RIGHT)) &trans  &trans  &trans        &sys_reset   &trans      &sys_reset   &trans           &bt BT_DISC 0 &bt BT_DISC 1 &trans  &trans
@@ -124,7 +127,7 @@
             >;
         };
 
-        6-markdown {
+        markdown_layer {
             bindings = <
 &kp LC(NUMBER_1)  &kp LC(NUMBER_2)  &kp LC(NUMBER_3)  &kp LA(C)  &kp LC(B)                               &studio_unlock  &trans  &trans  &trans  &trans
 &kp LA(L)         &kp LA(N)         &kp LA(K)         &trans     &kp LC(I)  &kp LS(LC(V))    &trans      &trans          &trans  &trans  &trans  &trans
@@ -135,6 +138,13 @@
 
         layer_7 {
             bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+            >;
+        };
+    };            bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
