@@ -90,7 +90,7 @@
 
         scroll_layer {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans    &kp LC(W)  &trans    &trans    &kp JP_MINUS
+&trans  &trans  &trans  &trans  &trans                      &trans    &kp LC(W)  &trans    &trans    &kp MINUS
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans    &trans     &trans    &kp UP    &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans    &kp LEFT   &kp DOWN  &kp RIGHT &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &kp JP_KANA &kp JP_EISU                       &trans
