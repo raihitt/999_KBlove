@@ -120,7 +120,7 @@
 &kp LC(NUMBER_1)  &trans  &trans  &trans        &bootloader                           &bootloader      &bt BT_SEL 0  &bt BT_SEL 1  &trans  &trans
 &kp LS(LA(RIGHT)) &trans  &trans  &trans        &sys_reset   &trans      &sys_reset   &trans           &bt BT_DISC 0 &bt BT_DISC 1 &trans  &trans
 &kp LS(LA(LEFT))  &trans  &trans  &trans        &trans       &bt BT_CLR_ALL &trans    &bt BT_CLR_ALL   &trans        &trans        &trans  &trans
-&kp VOL_UP        &kp VOL_DN &trans &trans      &trans       &trans      &trans       &trans                                               &trans
+&kp C_VOL_UP        &kp C_VOL_DN &trans &trans      &trans       &trans      &trans       &trans                                               &trans
             >;
         };
 
