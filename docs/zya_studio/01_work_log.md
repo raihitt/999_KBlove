@@ -158,9 +158,12 @@ ZMK Studio (DYA) 上で「ランタイム入力プロセッサが見つかりま
    - 編集ミスによりファイルの末尾に `bindings` ブロックが重複していた箇所をクリーンアップ。
 
 #### ビルド結果 (最終)
-- **Run ID**: [#210](https://github.com/raihitt/999_KBlove/actions/runs/22544258778)
+- **Run ID**: [#211](https://github.com/raihitt/999_KBlove/actions/runs/22554448553)
 - **Status**: ✅ Success
-- **コミット**: `c338435` (volume keycode fix) および `a312262` (array length fix)
+- **コミット**: `a1d0708` (rename layer_7 to raw_scroll_layer)
+
+#### やったこと (追記)
+- `layer_7` を `raw_scroll_layer` にリネーム。
 
 #### 次のアクション
 - [x] ビルド成功の確認
