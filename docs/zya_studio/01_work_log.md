@@ -101,9 +101,25 @@ ZMK Studio (DYA) 上で「ランタイム入力プロセッサが見つかりま
 - 「クリーンペアリング」の手順を提示。
 
 #### 次のアクション
-- [ ] ビルド完了後、実機に書き込み。
-- [ ] キーボード側 `&bt BT_CLR` ＋ PC 側 Bluetooth デバイス削除を行い、再ペアリングを実施。
-- [ ] DYA Studio (BLE) 接続を確認。
+- [x] ビルド完了後、実機に書き込み。
+- [x] キーボード側 `&bt BT_CLR` ＋ PC 側 Bluetooth デバイス削除を行い、再ペアリングを実施。
+- [x] DYA Studio (BLE) 接続をテスト → 依然として接続不可。
+
+---
+
+### 2026-03-01 — DYA Studio BLE 接続調査結果 (Macの制限)
+
+#### 原因調査結果
+- 前回の対応策を実施しても接続できない根本原因は、**macOS における Web Bluetooth API の OS レベルのセキュリティ制限** であることが判明。
+- Apple はセキュリティ上の理由（キーロガーの防止等）から、ブラウザ（Chrome / Edge 等）から HID（キーボードやマウス）プロファイルを持つデバイスへの Web Bluetooth 接続を一律でブロックしている。
+- ZMK Studio 本家の場合は、「Mac 用のネイティブアプリ（ZMK Studio.app）」を提供することでこのブラウザの制限を回避して BLE 接続を実現している。しかし、DYA Studio は Web アプリケーション専用であるため、Mac 上でブラウザから BLE 経由で接続することは**技術的に不可能**である（ペアリング画面で即座に弾かれ "User cancelled the connection attempt" エラーとなる）。
+
+#### 対応内容・結論
+- Mac 環境で DYA Studio を利用する場合は、**必ず USB 接続** を使用する必要がある。
+- （Windows や Linux、Android 環境であれば、Web Bluetooth の制限が異なるため BLE 接続を利用可能）
+- 設定上の不備ではなく OS の仕様であるため、これ以上のファームウェア側の修正は不要。
+- この制限事項を `00_roadmap.md` の確認手順に反映し、ドキュメントを更新した。
+
 
 ---
 
@@ -118,5 +134,25 @@ ZMK Studio (DYA) 上で「ランタイム入力プロセッサが見つかりま
 - **AML 除外設定の最適化**:
     - `K + L` を `excluded-positions` に戻し、コンボ入力中に AML が解除されないように復元。
     - DYA Studio のトラックボールタブ内で AML 設定が連動することを確認。
+
+---
+
+## 2026-03-01 — キーマップの全面的更新 (DYA Studio 画像準拠)
+
+### やったこと
+- `img/DYA/` 配下の 8 枚のスクリーンショットを参考に、`config/tomkey.keymap` を全面的に書き換えた。
+- **レイヤー名の変更**: `Layer_0`, `1-mouse`, `2-scroll`, `3-ctl`, `4-number`, `5-function`, `6-markdown`, `Layer_7` とし、DYA Studio の UI と一致させた。
+- **キー割当の同期**:
+    - 日本語キーボード特有の記号 (`JP_CARET`, `JP_COLON` 等) や特殊なショートカットを画像通りに配置。
+    - マウスボタンやスクロール、カーソルキーの配置を修正。
+- **実装の詳細**:
+    - `Layer_0` に `&mt LCTRL JP_CARET` や `&mt LSHFT JP_COLON` を導入。
+    - `3-ctl` レイヤーに `LS(LC(V))` や `LG(V)` などの高度なショートカットを配置。
+    - `5-function` レイヤーに `bootloader`, `sys_reset`, `bt BT_SEL` などを配置。
+
+### 次のアクション
+- [x] キーマップの書き換え完了
+- [x] 作業ログの更新
+- [ ] ビルドと実機確認 (ユーザー)
 
 

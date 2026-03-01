@@ -70,72 +70,70 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        Layer_0 {
             bindings = <
-&kp Q      &kp W         &kp E             &kp R           &kp T                                                 &kp Y            &kp U     &kp I         &kp O    &kp P
-&kp A      &kp S         &kp D             &kp F           &kp G        &mo 6                 &kp BACKSLASH      &kp H            &kp J     &kp K         &kp L    &kp MINUS
-&kp Z      &kp X         &kp C             &kp V           &kp B        &kp LEFT_BRACKET      &kp RIGHT_BRACKET  &kp N            &kp M     &kp COMMA     &kp DOT  &lt 2 SLASH
-&kp LCTRL  &kp LEFT_ALT  &kp LEFT_COMMAND  &kp LEFT_SHIFT  &lt 4 SPACE  &kp LA(SPACE)         &kp ENTER          &lt 3 BACKSPACE                                   &lt 5 ESCAPE
+&lt 2 Q              &kp W         &kp E             &kp R           &kp T                                                            &kp Y            &kp U     &kp I      &kp O     &lt 5 P
+&mt LCTRL JP_CARET  &kp S         &kp D             &kp F           &kp G              &kp JP_CARET       &kp BACKSLASH              &kp H            &kp J     &kp K      &kp L     &kp ENTER
+&mt LSHFT JP_COLON  &kp X         &kp C             &kp V           &kp B              &kp JP_COLON       &kp JP_CARET               &kp N            &kp M     &mkp MB2   &mkp MB1  &lt 2 SLASH
+&lt 3 ESCAPE        &kp LEFT_ALT  &kp LEFT_COMMAND  &kp LEFT_SHIFT  &mt LEFT_SHIFT TAB &kp SPACE          &lt 3 BACKSPACE            &mo 4                                           &lt 6 ESCAPE
             >;
         };
 
-        MOUSE {
+        1-mouse {
             bindings = <
-&trans         &trans         &trans            &trans          &trans                                           &trans           &trans    &trans        &trans      &trans
-&trans         &trans         &trans            &trans          &trans       &trans           &trans             &trans           &trans    &trans        &trans      &trans
-&trans         &trans         &trans            &trans          &trans       &trans           &trans             &trans           &trans    &mkp MB1      &mkp MB2    &trans
-&kp LCTRL      &kp LEFT_ALT   &kp LEFT_COMMAND  &kp LEFT_SHIFT  &trans       &trans           &trans             &mo 3                                                &trans
+&trans         &trans         &trans            &trans          &trans                                               &trans           &trans    &trans    &trans    &trans
+&trans         &trans         &trans            &trans          &trans          &trans            &trans             &trans           &trans    &trans    &trans    &trans
+&trans         &trans         &trans            &trans          &trans          &trans            &trans             &trans           &trans    &mkp MB2  &mkp MB1  &trans
+&trans         &trans         &trans            &trans          &trans          &trans            &trans             &trans                                         &trans
             >;
         };
 
-        SCROLL {
+        2-scroll {
             bindings = <
-&kp ESCAPE  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
-&trans      &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&kp F12     &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&kp F12     &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+&trans  &trans  &trans  &trans  &trans                      &trans    &kp LC(W)  &trans    &trans    &kp JP_MINUS
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans    &trans     &trans    &kp UP    &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans    &kp LEFT   &kp DOWN  &kp RIGHT &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &jp_kana  &jp_eisu                       &trans
             >;
         };
 
-        ARROW {
+        3-ctl {
             bindings = <
-&kp GRAVE  &kp LC(LS(TAB))         &kp LG(RIGHT)   &kp NUMBER_9     &kp NUMBER_0                                   &trans  &kp RC(LEFT_ARROW)  &kp UP_ARROW      &kp RC(RIGHT_ARROW)  &kp LG(P)
-&kp TAB    &kp LA(LG(LEFT_ARROW))  &kp LG(LEFT)    &kp LG(LA(RIGHT_ARROW))  &kp LEFT_BRACKET   &trans      &trans  &trans  &kp LEFT_ARROW      &kp DOWN_ARROW    &kp RIGHT_ARROW      &kp LG(K)
-&kp LCMD   &kp LG(LS(LEFT_ARROW))  &trans          &kp LG(LS(RIGHT_ARROW))  &kp RIGHT_BRACKET  &trans      &trans  &trans  &trans              &kp LC(UP_ARROW)  &trans               &kp LG(L)
-&trans     &trans                  &kp LEFT_SHIFT  &trans                   &trans             &trans      &trans  &trans                                                              &trans
+&trans  &trans  &trans  &kp LC(G)      &kp LC(T)                                  &kp LC(W)        &kp LC(T)      &trans  &kp LG(LEFT)  &kp LG(RIGHT)
+&trans  &trans  &trans  &kp LC(F)      &kp LC(F)      &kp LS(LC(V))  &trans       &kp LC(A)        &kp LC(PG_UP)  &trans  &trans        &kp LA(A)
+&trans  &trans  &trans  &trans         &trans         &kp LG(V)      &trans       &kp LG(G)        &kp LC(PG_DN)  &trans  &trans        &kp LG(L)
+&trans  &trans  &trans  &mt LSHFT LC(X) &kp LC(C)      &kp LC(V)      &trans       &kp LS(LC(N))    &kp LC(N)                            &trans
             >;
         };
 
-        NUM {
+        4-number {
             bindings = <
-&kp GRAVE                &kp NUMBER_7  &kp NUMBER_1  &kp LG(LS(NUMBER_4))  &kp JP_PLUS                        &kp BACKSLASH    &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp SEMICOLON
-&kp SLASH                &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6          &kp JP_ASTERISK  &trans      &trans  &kp EXCLAMATION  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp SQT
-&mt LEFT_SHIFT NUMBER_0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3          &kp PERIOD    &trans      &trans  &kp NUMBER_0     &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp JP_EQUAL
-&trans                   &trans        &trans        &trans                &trans        &trans      &trans  &kp LEFT_SHIFT                                             &trans
+&kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp LS(NUMBER_9)  &kp LS(NUMBER_0)                             &kp LS(SLASH)  &kp LS(NUMBER_1)  &trans         &kp SLASH    &kp JP_EQUAL
+&kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp JP_LBRACKET   &kp JP_RBRACKET   &trans            &trans  &kp LS(NUMBER_2)  &kp LS(NUMBER_1)  &trans         &trans       &trans
+&kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &trans            &trans            &trans            &trans  &trans            &trans            &trans         &trans       &trans
+&kp NUMBER_0  &kp COMMA     &kp DOT       &kp LS(JP_YEN)    &trans            &kp LEFT_SHIFT    &trans  &trans                                                          &trans
             >;
         };
 
-        FUNCTION {
+        5-function {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                       &kp F1  &kp F2  &kp F3  &kp F4  &kp F5
-&trans  &trans  &trans  &trans  &trans  &trans      &kp F13  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans  &trans  &trans  &trans  &kp F11
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans                          &kp F12
+&kp LC(NUMBER_1)  &trans  &trans  &trans        &bootloader                           &bootloader      &bt BT_SEL 0  &bt BT_SEL 1  &trans  &trans
+&kp LS(LA(RIGHT)) &trans  &trans  &trans        &sys_reset   &trans      &sys_reset   &trans           &bt BT_DISC 0 &bt BT_DISC 1 &trans  &trans
+&kp LS(LA(LEFT))  &trans  &trans  &trans        &trans       &bt BT_CLR_ALL &trans    &bt BT_CLR_ALL   &trans        &trans        &trans  &trans
+&kp VOL_UP        &kp VOL_DN &trans &trans      &trans       &trans      &trans       &trans                                               &trans
             >;
         };
 
-        layer_6 {
+        6-markdown {
             bindings = <
-&kp LG(Q)      &kp LC(W)  &trans     &trans     &trans                             &studio_unlock  &bt BT_NXT       &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
-&kp LG(LS(Z))  &trans     &kp LC(C)  &trans     &trans  &trans      &trans         &trans          &trans           &trans        &trans        &trans
-&kp LG(Z)      &kp LG(X)  &kp LG(C)  &kp LG(V)  &trans  &trans      &trans         &trans          &trans           &trans        &trans        &trans
-&trans         &trans     &trans     &trans     &trans  &trans      &trans         &trans                                                       &trans
+&kp LC(NUMBER_1)  &kp LC(NUMBER_2)  &kp LC(NUMBER_3)  &kp LA(C)  &kp LC(B)                               &studio_unlock  &trans  &trans  &trans  &trans
+&kp LA(L)         &kp LA(N)         &kp LA(K)         &trans     &kp LC(I)  &kp LS(LC(V))    &trans      &trans          &trans  &trans  &trans  &trans
+&kp LC(Z)         &kp LC(Y)         &trans            &trans     &kp LG(V)  &kp LC(C)       &trans      &trans          &trans  &trans  &trans  &trans
+&kp LC(X)         &kp LC(C)         &kp LC(V)         &kp LC(C)  &kp LC(V)  &trans          &trans      &trans                                  &trans
             >;
         };
 
-        VSCROLL {
-            /* 縦スクロール専用レイヤー (layer 7): I+O同時押しで起動 */
-            /* 実機的には全キーを透過し、overlayのscroll_vブロックがトラックボールにX軸抑制をかける */
+        Layer_7 {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
