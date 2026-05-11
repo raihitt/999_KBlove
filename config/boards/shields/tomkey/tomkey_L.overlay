@@ -5,6 +5,11 @@
 #include <behaviors/battery_history_request.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
+/*
+ * Keep the serial device available on the central side because the
+ * studio-rpc-usb-uart build snippet attaches DYA Studio's wired transport here.
+ */
+
 / {
     split_inputs {
         #address-cells = <1>;

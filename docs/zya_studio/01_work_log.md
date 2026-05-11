@@ -2,6 +2,26 @@
 
 ---
 
+## 2026-05-11 — Windows 有線 DYA Studio 非応答の調査
+
+### 現象
+- Windows で Central (L) を USB 接続しても、DYA Studio が有線接続で反応しない。
+
+### 原因
+- `build.yaml` では Central ビルドに `studio-rpc-usb-uart` スニペットを適用していた。
+- 一方で共通定義の `config/boards/shields/tomkey/tomkey.dtsi` では `&xiao_serial` を一律で `disabled` にしており、Central 側の有線 Studio RPC 経路までまとめて無効化していた。
+- その結果、Peripheral では問題がなくても、Windows から USB で接続する Central 側の役割に対して設定責務が分離されていなかった。
+
+### 対応
+- `&xiao_serial` の無効化を共通 DTS から削除。
+- Peripheral 専用の `tomkey_R.overlay` にのみ `&xiao_serial { status = "disabled"; };` を移動。
+- Central 側 `tomkey_L.overlay` に「有線 DYA Studio では serial を維持する」意図コメントを追加。
+
+### 意図
+- 共通定義ではなく左右それぞれの責務に寄せることで、有線 Studio 用の Central 設定と Peripheral の省略設定が衝突しないようにした。
+
+---
+
 ## 2026-02-26 — 調査・計画フェーズ
 
 ### やったこと
@@ -169,5 +189,4 @@ ZMK Studio (DYA) 上で「ランタイム入力プロセッサが見つかりま
 - [x] ビルド成功の確認
 - [ ] 実機への書き込みと動作確認（ユーザー）
 - [ ] DYA Studio 上でのキーマップ・AML・トラックボール設定の反映確認
-
 

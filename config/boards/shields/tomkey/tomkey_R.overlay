@@ -4,6 +4,11 @@
 #include <dt-bindings/zmk/input_transform.h>
 #include <behaviors/battery_history_request.dtsi>
 
+/* The peripheral side never serves wired Studio RPC, so the serial block stays off. */
+&xiao_serial {
+    status = "disabled";
+};
+
 &default_transform {
     col-offset = <6>;
 };
