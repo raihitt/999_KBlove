@@ -34,7 +34,7 @@
 ## スペック
 - ファームウェア
   - ZMK を使用しています
-  - ZMKStudio に対応しております
+  - ZMK Studio / DYA Studio に対応しております
 - ハードウェア
   - 43 キー
   - choc v1/v2、lofree 系列のスイッチが使用可能
@@ -63,13 +63,23 @@
 - config/boards/shields/tomkey/tomkey_L.conf
 - `CONFIG_ZMK_DONGLE_DISPLAY_MAC_MODIFIERS=n`にする
 
+## DYA Studio について
+
+- DYA Studio は [https://studio.dya.cormoran.works/](https://studio.dya.cormoran.works/) から利用できます
+- tomkey では左手 `tomkey_L` が Central、右手 `tomkey_R` が Peripheral です
+- 有線で DYA Studio を使う場合は、必ず左手 Central 側を USB で PC に接続してください
+- Windows / Linux / Android では、環境によっては BLE 接続も利用できます
+- macOS では Web Bluetooth の制限により、DYA Studio の BLE 接続は利用できません。macOS では USB 接続を使用してください
+- DYA Studio 対応の詳細は `docs/zya_studio/README.md` を参照してください
+
 ## キーマップについて
 
 - 変更着手前に `docs/roadmap/roadmap.md` を確認してください
 - `keymap` 編集は AML 設定の段階適用・整合確認が完了してから実施してください
-- ZMKstudio にて確認・編集を行なってください
+- ZMK Studio または DYA Studio にて確認・編集を行なってください
 
   - https://zmk.studio/
+  - https://studio.dya.cormoran.works/
 
 - ZMK keymap-editor も使用できます
   - マクロ設定などを使いたい場合はこちらを使うとべんりです
