@@ -47,7 +47,12 @@ uv tool install west   # westを常用する場合だけ。一度でよい
 
 GitHub Actionsの`dya-level-3-firmware`成果物にも同じ3ファイルを格納する。ファイル名は従来の書き込み手順に合わせているが、中身はLevel 3用の`tomkey_R3`（右手Peripheral）と`tomkey_L3`（左手Central）である。設定リセットは必要な場合だけ先に実行する。設定リセット用FWにはUSB RPC用snippetとZephyr 4.1系のUART互換overlayを付けている。
 
-2026-08-19時点では、L3/R3ともローカルビルドとUF2生成まで確認済み。実機への書き込み、左右接続、DYA Studio接続、runtime Comboの動作はまだ未確認である。
+2026-08-29時点では、3ファイルのローカルビルドとUF2生成、およびGitHub ActionsのLevel 3ビルド成功を確認済み。実機への書き込み、左右接続、DYA Studio接続、runtime Comboの動作はまだ未確認である。
+
+検証済みAction:
+
+- [Level 3 firmware run 33228323306](https://github.com/raihitt/999_KBlove/actions/runs/33228323306)
+- [Stable firmware run 33228323488](https://github.com/raihitt/999_KBlove/actions/runs/33228323488)
 
 ## 段階検証
 
