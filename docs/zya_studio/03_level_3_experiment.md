@@ -19,11 +19,13 @@
 | 現行安定 | `config/west.yml` | 既存機能・通常更新用。変更しない |
 | Level 3実験 | `config/west-dya-level-3.yml` | `main+dya` とPR #4相当の機能。未マージ依存を含む |
 
-Level 3は別west workspace (`.dya-local/level-3/`)に作成されるため、通常の`.west`や安定設定を共有しない。`main+dya`側のボード名は`xiao_ble`である。
+Level 3は別west workspace (`.dya-local/level-3/`)に作成されるため、通常の`.west`や安定設定を共有しない。ビルドスクリプトではZMKのボードバリアント`xiao_ble//zmk`を使用する。通常の`xiao_ble`を指定すると設定保存バックエンドが無効になり、DYA Studioの保存が`operation not allowed or storage error`になるため、手動ビルドでもこのバリアントを使う。
 
 L3（左手）はDYA Studio接続とruntime機能を持つCentral、R3（右手）はBLE splitとcustom-settings relayを持つPeripheralとして分ける。Peripheral側でCentral専用のStudio RPCやkeymap編集機能を有効にすると、Central専用APIのリンクに失敗するため、意図的に有効化していない。
 
-Level 3では、現行の`zmk-module-battery-history`と`zmk-module-settings-rpc`を読み込まない。これらは`main+dya`の現行relay/APIと互換せず、Level 3のビルドを止めるためである。安定経路の`config/west.yml`と既存Level 2設定は変更していない。R3のPMW3610は外部ドライバーではなくZephyr 4.1系の組み込み入力ドライバーを使用する。
+Level 3では、現行の`zmk-module-battery-history`と`zmk-module-settings-rpc`を読み込まない。これらは`main+dya`の現行relay/APIと互換せず、Level 3のビルドを止めるためである。安定経路の`config/west.yml`と既存Level 2設定は変更していない。R3のPMW3610は安定版と同じ`badjeff/zmk-pmw3610-driver`を使用する。ただしZephyr 4.1系にも同名の組み込みドライバーがあるため、Level 3のローカルビルドでは外部ドライバーのcompatibleを`pixart,pmw3610-zmk`へ名前空間化し、二重登録を避けている。これにより、水平移動の挙動を安定版に合わせる。
+
+表示は安定版の`dongle_display`ではなく、Level 3の`tom_oled`を左右両方に載せる構成である。そのためLCDの左右表示・接続表示の配置やアイコンは安定版と一致しない。右手側は`CONN OK`の接続表示を基準に確認する。旧LCDの左右アイコンをそのまま復元することは、今回の保存・トラックボール修正とは別の表示パッチとして扱う。
 
 安定経路の`zmk-module-ble-management`と`zmk-module-runtime-input-processor`は、安定版DYA ZMKが提供するv0.3 APIと一致する`zmk-v0.3.0.0`タグに固定している。Level 3の`config/west-dya-level-3.yml`では、`main+dya`と互換する現行`main`を使用する。この2つの依存セットを混在させない。
 
@@ -41,15 +43,17 @@ uv tool install west   # westを常用する場合だけ。一度でよい
 
 ```text
 .dya-local/level-3/firmware/settings_reset-seeeduino_xiao_ble-zmk.uf2
-.dya-local/level-3/firmware/tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2
-.dya-local/level-3/firmware/tomkey_R-seeeduino_xiao_ble-zmk.uf2
+.dya-local/level-3/firmware/tomkey_L3-tom_oled-seeeduino_xiao_ble-zmk.uf2
+.dya-local/level-3/firmware/tomkey_R3-tom_oled-seeeduino_xiao_ble-zmk.uf2
 ```
 
-GitHub Actionsの`dya-level-3-firmware`成果物にも同じ3ファイルを格納する。ファイル名は従来の書き込み手順に合わせているが、中身はLevel 3用の`tomkey_R3`（右手Peripheral）と`tomkey_L3`（左手Central）である。設定リセットは必要な場合だけ先に実行する。設定リセット用FWにはUSB RPC用snippetとZephyr 4.1系のUART互換overlayを付けている。
+GitHub Actionsの`dya-level-3-firmware`成果物にも同じ3ファイルを格納する。`tomkey_L3-tom_oled...`はLevel 3用の左手Central、`tomkey_R3-tom_oled...`は右手Peripheralである。設定リセットは必要な場合だけ先に実行する。設定リセット用FWにはUSB RPC用snippetとZephyr 4.1系のUART互換overlayを付けている。
+
+`tomkey_L3`と`tomkey_R3`はDYA Studioの変更をNVSへ保存できる構成である。生成後の`.config`では`CONFIG_FLASH=y`、`CONFIG_NVS=y`、`CONFIG_SETTINGS_NVS=y`を確認する。`settings_reset`を書き込んだままではruntime機能を使えないため、リセット後は必ずL3/R3の通常FWへ戻す。
 
 重要: `settings_reset-seeeduino_xiao_ble-zmk.uf2` は設定消去専用で、Level 3のruntime Macro／runtime Comboを無効にしたFWである。このFWを書き込んだ状態では、DYA Studioの「マクロ＆コンボ」に両機能が表示されない。機能確認時は、設定リセットが必要なら先に一度だけ実行し、その後に必ずLevel 3の右手Peripheralと左手Centralを両方書き込む。
 
-2026-08-29時点では、3ファイルのローカルビルドとUF2生成、およびGitHub ActionsのLevel 3ビルド成功を確認済み。実機への書き込み、左右接続、DYA Studio接続、runtime Comboの動作はまだ未確認である。
+2026-08-29時点では、3ファイルのローカルビルドとUF2生成を確認済み。保存領域を有効にしたLevel 3ビルド、外部PMW3610ドライバーのリンク、runtime Combo/RPC関連Kconfigの有効化も確認済み。実機への書き込み、左右接続、DYA Studio保存、runtime Comboの動作、LCD表示の最終確認はまだ必要である。
 
 検証済みAction:
 
@@ -74,7 +78,7 @@ GitHub Actionsの`dya-level-3-firmware`成果物にも同じ3ファイルを格�
 
 ## 未確認事項
 
-- `main+dya`（Zephyr 4.1系）と既存PMW3610ドライバーの完全互換性
+- `main+dya`（Zephyr 4.1系）と安定版PMW3610ドライバーの実機完全互換性
 - 実機での`tomkey_L3`/`tomkey_R3`の左右接続とDYA Studio認識
 - `zmk-tom-oled`を含むtomkeyのLevel 3実機表示
 - 43キーの物理レイアウト上でのトラックボール表示位置

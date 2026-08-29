@@ -107,6 +107,12 @@ manifest:
     - name: zmk-feature-runtime-combo
       remote: cormoran
       revision: main
+    # Keep the Level 3 trackball implementation aligned with the stable build.
+    # Its compatible is namespaced by dya-local-build.sh because Zephyr 4.1
+    # also ships a different pixart,pmw3610 driver.
+    - name: zmk-pmw3610-driver
+      remote: badjeff
+      revision: zmk-0.3
     - name: zmk-feature-input-stream
       remote: cormoran
       revision: main

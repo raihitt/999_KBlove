@@ -8,8 +8,10 @@ repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 workspace="$repo_root/.dya-local/level-3"
 manifest_source="$repo_root/config/west-dya-level-3.yml"
 config_source="$repo_root/config"
+pmw3610_patch="$repo_root/config/patches/dya-level3-pmw3610.patch"
 update_stamp="$workspace/.west-update.sha256"
 firmware_dir="$workspace/firmware"
+board="xiao_ble//zmk"
 
 # A shallow Zephyr checkout plus build artifacts still needs several GiB.
 # Refuse early instead of leaving a partially checked-out workspace on a full
@@ -78,6 +80,19 @@ else
   echo "West dependencies are unchanged; skipping west update."
 fi
 
+# Zephyr 4.1 also defines pixart,pmw3610.  Isolate the stable ZMK driver under
+# a Level 3-only compatible so both manifests can coexist without binding or
+# device-definition collisions.
+pmw3610_repo="$workspace/zmk-pmw3610-driver"
+if git -C "$pmw3610_repo" apply --unidiff-zero --check "$pmw3610_patch" >/dev/null 2>&1; then
+  git -C "$pmw3610_repo" apply --unidiff-zero "$pmw3610_patch"
+elif git -C "$pmw3610_repo" apply --unidiff-zero --reverse --check "$pmw3610_patch" >/dev/null 2>&1; then
+  echo "PMW3610 Level 3 compatibility patch is already applied."
+else
+  echo "Unable to apply or verify the PMW3610 Level 3 compatibility patch." >&2
+  exit 1
+fi
+
 build_one() {
   local artifact="$1"
   local shield="$2"
@@ -110,15 +125,15 @@ build_one() {
   (
     cd "$workspace"
     "${west_cmd[@]}" build -s "$workspace/zmk/app" -d "$build_dir" \
-      -b xiao_ble -p auto -- "${cmake_args[@]}"
+      -b "$board" -p auto -- "${cmake_args[@]}"
   )
 
   cp "$build_dir/zephyr/zmk.uf2" "$firmware_dir/$firmware_name"
 }
 
 build_one settings_reset settings_reset "" studio-rpc-usb-uart "settings_reset-seeeduino_xiao_ble-zmk.uf2" "dya-settings-reset.overlay"
-build_one tomkey_L3 tomkey_L3 tomkey_L3 studio-rpc-usb-uart "tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2"
-build_one tomkey_R3 tomkey_R3 tomkey_R3 "" "tomkey_R-seeeduino_xiao_ble-zmk.uf2"
+build_one tomkey_L3 tomkey_L3 tomkey_L3 studio-rpc-usb-uart "tomkey_L3-tom_oled-seeeduino_xiao_ble-zmk.uf2"
+build_one tomkey_R3 tomkey_R3 tomkey_R3 "" "tomkey_R3-tom_oled-seeeduino_xiao_ble-zmk.uf2"
 
 echo
 echo "Build completed. UF2 files:"
@@ -126,5 +141,5 @@ find "$firmware_dir" -type f -name '*.uf2' -print | sort
 echo
 echo "Flash only after checking the UF2/board role:"
 echo "  firmware/settings_reset-seeeduino_xiao_ble-zmk.uf2 -> optional settings reset"
-echo "  firmware/tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2 -> Level 3 Central (left)"
-echo "  firmware/tomkey_R-seeeduino_xiao_ble-zmk.uf2 -> Level 3 Peripheral (right)"
+echo "  firmware/tomkey_L3-tom_oled-seeeduino_xiao_ble-zmk.uf2 -> Level 3 Central (left)"
+echo "  firmware/tomkey_R3-tom_oled-seeeduino_xiao_ble-zmk.uf2 -> Level 3 Peripheral (right)"
