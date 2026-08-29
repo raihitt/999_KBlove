@@ -24,7 +24,9 @@ manifest:
       revision: main
     - name: zmk-module-runtime-input-processor
       remote: cormoran
-      revision: main
+      # Stable DYA ZMK exposes the v0.3 one-argument layer API.
+      # Level 3 uses the newer main+dya tree and keeps its own manifest entry.
+      revision: zmk-v0.3.0.0
     # トラックボールドライバー (badjeff)
     - name: zmk-pmw3610-driver
       remote: badjeff
