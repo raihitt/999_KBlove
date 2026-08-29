@@ -40,9 +40,12 @@ uv tool install west   # westを常用する場合だけ。一度でよい
 初回は依存取得のため時間がかかる。生成物は以下に出る。
 
 ```text
-.dya-local/level-3/build/tomkey_L3/zephyr/zmk.uf2
-.dya-local/level-3/build/tomkey_R3/zephyr/zmk.uf2
+.dya-local/level-3/firmware/settings_reset-seeeduino_xiao_ble-zmk.uf2
+.dya-local/level-3/firmware/tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2
+.dya-local/level-3/firmware/tomkey_R-seeeduino_xiao_ble-zmk.uf2
 ```
+
+GitHub Actionsの`dya-level-3-firmware`成果物にも同じ3ファイルを格納する。ファイル名は従来の書き込み手順に合わせているが、中身はLevel 3用の`tomkey_R3`（右手Peripheral）と`tomkey_L3`（左手Central）である。設定リセットは必要な場合だけ先に実行する。
 
 2026-08-19時点では、L3/R3ともローカルビルドとUF2生成まで確認済み。実機への書き込み、左右接続、DYA Studio接続、runtime Comboの動作はまだ未確認である。
 
@@ -59,7 +62,7 @@ uv tool install west   # westを常用する場合だけ。一度でよい
 ## 切り戻し
 
 - Level 3を止める: `.dya-local/`を削除してよい（生成物のみ）。
-- 安定FWへ戻す: 通常のGitHub Actions成果物、または`config/west.yml`を使った従来ビルドを書き込む。
+- 安定FWへ戻す: `Build ZMK firmware`の成功した成果物から、`settings_reset-seeeduino_xiao_ble-zmk.uf2`を必要時だけ先に書き込み、その後`tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2`（左手Central）と`tomkey_R-seeeduino_xiao_ble-zmk.uf2`（右手Peripheral）を書き込む。安定版Actionが失敗している場合は、最後に成功した安定版Action成果物を使う。
 - DYA Studioの保存設定はFWの設定領域に残る可能性があるため、機能比較時は必要に応じてStudio側のリセット／設定初期化を行う。
 
 ## 未確認事項

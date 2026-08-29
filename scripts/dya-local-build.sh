@@ -9,6 +9,7 @@ workspace="$repo_root/.dya-local/level-3"
 manifest_source="$repo_root/config/west-dya-level-3.yml"
 config_source="$repo_root/config"
 update_stamp="$workspace/.west-update.sha256"
+firmware_dir="$workspace/firmware"
 
 # A shallow Zephyr checkout plus build artifacts still needs several GiB.
 # Refuse early instead of leaving a partially checked-out workspace on a full
@@ -50,7 +51,7 @@ sha256_file() {
   fi
 }
 
-mkdir -p "$workspace/config" "$workspace/build"
+mkdir -p "$workspace/config" "$workspace/build" "$firmware_dir"
 cp "$manifest_source" "$workspace/config/west-dya-level-3.yml"
 
 if [[ ! -d "$workspace/.west" ]]; then
@@ -80,14 +81,19 @@ fi
 build_one() {
   local artifact="$1"
   local shield="$2"
-  local snippet="${3:-}"
+  local keymap="${3:-}"
+  local snippet="${4:-}"
+  local firmware_name="$5"
   local build_dir="$workspace/build/$artifact"
   local -a cmake_args=(
     "-DZMK_CONFIG=$config_source"
-    "-DSHIELD=${shield};tom_oled"
-    "-DKEYMAP_FILE=$config_source/${artifact}.keymap"
+    "-DSHIELD=${shield}"
     "-DEXTRA_CONF_FILE=$config_source/experimental/dya-level-3.conf"
   )
+
+  if [[ -n "$keymap" ]]; then
+    cmake_args+=("-DSHIELD=${shield};tom_oled" "-DKEYMAP_FILE=$config_source/${keymap}.keymap")
+  fi
 
   if [[ -n "$snippet" ]]; then
     cmake_args+=("-DSNIPPET=$snippet")
@@ -98,15 +104,19 @@ build_one() {
     "${west_cmd[@]}" build -s "$workspace/zmk/app" -d "$build_dir" \
       -b xiao_ble -p auto -- "${cmake_args[@]}"
   )
+
+  cp "$build_dir/zephyr/zmk.uf2" "$firmware_dir/$firmware_name"
 }
 
-build_one tomkey_L3 tomkey_L3 studio-rpc-usb-uart
-build_one tomkey_R3 tomkey_R3
+build_one settings_reset settings_reset "" "" "settings_reset-seeeduino_xiao_ble-zmk.uf2"
+build_one tomkey_L3 tomkey_L3 tomkey_L3 studio-rpc-usb-uart "tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2"
+build_one tomkey_R3 tomkey_R3 tomkey_R3 "" "tomkey_R-seeeduino_xiao_ble-zmk.uf2"
 
 echo
 echo "Build completed. UF2 files:"
-find "$workspace/build" -type f -name '*.uf2' -print | sort
+find "$firmware_dir" -type f -name '*.uf2' -print | sort
 echo
 echo "Flash only after checking the UF2/board role:"
-echo "  tomkey_L3 -> build/tomkey_L3/zephyr/zmk.uf2 (Central)"
-echo "  tomkey_R3 -> build/tomkey_R3/zephyr/zmk.uf2 (Peripheral)"
+echo "  firmware/settings_reset-seeeduino_xiao_ble-zmk.uf2 -> optional settings reset"
+echo "  firmware/tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2 -> Level 3 Central (left)"
+echo "  firmware/tomkey_R-seeeduino_xiao_ble-zmk.uf2 -> Level 3 Peripheral (right)"
