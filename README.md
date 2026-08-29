@@ -72,6 +72,7 @@
 - Level 3の実験機能は `docs/zya_studio/03_level_3_experiment.md` に分離しています
 - ローカルFWビルドは `./scripts/dya-local-build.sh` で行えます
 - GitHub Actions の `Build DYA Studio Level 3 firmware` から、従来の書き込み手順で扱えるLevel 3用の設定リセット・左手Central・右手PeripheralのUF2を取得できます
+- 注意: `settings_reset-seeeduino_xiao_ble-zmk.uf2` は設定消去専用で、DYAマクロ／コンボ機能は含みません。機能確認時は、Level 3用の左手・右手UF2を両方書き込んでください
 - 安定版へ戻す場合は、`Build ZMK firmware`の最後に成功した成果物を使用してください（詳細は `docs/zya_studio/03_level_3_experiment.md`）
 
 ## キーマップについて
