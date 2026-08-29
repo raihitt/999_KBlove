@@ -25,7 +25,7 @@ L3（左手）はDYA Studio接続とruntime機能を持つCentral、R3（右手�
 
 Level 3では、現行の`zmk-module-battery-history`と`zmk-module-settings-rpc`を読み込まない。これらは`main+dya`の現行relay/APIと互換せず、Level 3のビルドを止めるためである。安定経路の`config/west.yml`と既存Level 2設定は変更していない。R3のPMW3610は外部ドライバーではなくZephyr 4.1系の組み込み入力ドライバーを使用する。
 
-安定経路の`zmk-module-runtime-input-processor`は、安定版DYA ZMKが提供するv0.3 APIと一致する`zmk-v0.3.0.0`タグに固定している。Level 3の`config/west-dya-level-3.yml`では、`main+dya`と互換する現行`main`を使用する。この2つの依存セットを混在させない。
+安定経路の`zmk-module-ble-management`と`zmk-module-runtime-input-processor`は、安定版DYA ZMKが提供するv0.3 APIと一致する`zmk-v0.3.0.0`タグに固定している。Level 3の`config/west-dya-level-3.yml`では、`main+dya`と互換する現行`main`を使用する。この2つの依存セットを混在させない。
 
 ## ローカルビルド
 

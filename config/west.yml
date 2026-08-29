@@ -15,7 +15,8 @@ manifest:
     # DYA Studio モジュール
     - name: zmk-module-ble-management
       remote: cormoran
-      revision: main
+      # Match the stable DYA ZMK endpoint API.
+      revision: zmk-v0.3.0.0
     - name: zmk-module-battery-history
       remote: cormoran
       revision: main
