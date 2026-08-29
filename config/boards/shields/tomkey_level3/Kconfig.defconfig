@@ -1,7 +1,7 @@
-if SHIELD_TOMKEY_R
+if SHIELD_TOMKEY_R3
 
   config ZMK_KEYBOARD_NAME
-      default "tomkey_R"
+      default "tomkey_R3"
 
   config ZMK_SPLIT
       default y
@@ -31,10 +31,10 @@ if SHIELD_TOMKEY_R
 
 endif
 
-if SHIELD_TOMKEY_L
+if SHIELD_TOMKEY_L3
 
     config ZMK_KEYBOARD_NAME
-        default "tomkey_L"
+        default "tomkey_L3"
 
     config ZMK_SPLIT_ROLE_CENTRAL
         default y
@@ -63,6 +63,6 @@ if SHIELD_TOMKEY_L
         choice LV_COLOR_DEPTH
             default LV_COLOR_DEPTH_1
         endchoice
-  endif # LVGL
+    endif # LVGL
 
 endif

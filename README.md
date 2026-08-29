@@ -63,6 +63,15 @@
 - config/boards/shields/tomkey/tomkey_L.conf
 - `CONFIG_ZMK_DONGLE_DISPLAY_MAC_MODIFIERS=n`にする
 
+## DYA Studio について
+
+- DYA Studio は [https://studio.dya.cormoran.works/](https://studio.dya.cormoran.works/) から利用できます
+- tomkey では左手 `tomkey_L` が Central、右手 `tomkey_R` が Peripheral です
+- 有線でDYA Studioを使う場合は、左手Central側をUSBでPCに接続してください
+- macOSではDYA StudioのBLE接続を使わず、USB接続を使用してください
+- Level 3の実験機能は `docs/zya_studio/03_level_3_experiment.md` に分離しています
+- ローカルFWビルドは `./scripts/dya-local-build.sh` で行えます
+
 ## キーマップについて
 
 - 変更着手前に `docs/roadmap/roadmap.md` を確認してください
