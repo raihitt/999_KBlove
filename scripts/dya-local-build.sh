@@ -84,19 +84,27 @@ build_one() {
   local keymap="${3:-}"
   local snippet="${4:-}"
   local firmware_name="$5"
+  local extra_overlay="${6:-}"
   local build_dir="$workspace/build/$artifact"
   local -a cmake_args=(
     "-DZMK_CONFIG=$config_source"
     "-DSHIELD=${shield}"
-    "-DEXTRA_CONF_FILE=$config_source/experimental/dya-level-3.conf"
   )
 
   if [[ -n "$keymap" ]]; then
-    cmake_args+=("-DSHIELD=${shield};tom_oled" "-DKEYMAP_FILE=$config_source/${keymap}.keymap")
+    cmake_args+=(
+      "-DSHIELD=${shield};tom_oled"
+      "-DKEYMAP_FILE=$config_source/${keymap}.keymap"
+      "-DEXTRA_CONF_FILE=$config_source/experimental/dya-level-3.conf"
+    )
   fi
 
   if [[ -n "$snippet" ]]; then
     cmake_args+=("-DSNIPPET=$snippet")
+  fi
+
+  if [[ -n "$extra_overlay" ]]; then
+    cmake_args+=("-DEXTRA_DTC_OVERLAY_FILE=$config_source/experimental/$extra_overlay")
   fi
 
   (
@@ -108,7 +116,7 @@ build_one() {
   cp "$build_dir/zephyr/zmk.uf2" "$firmware_dir/$firmware_name"
 }
 
-build_one settings_reset settings_reset "" "" "settings_reset-seeeduino_xiao_ble-zmk.uf2"
+build_one settings_reset settings_reset "" studio-rpc-usb-uart "settings_reset-seeeduino_xiao_ble-zmk.uf2" "dya-settings-reset.overlay"
 build_one tomkey_L3 tomkey_L3 tomkey_L3 studio-rpc-usb-uart "tomkey_L dongle_display-seeeduino_xiao_ble-zmk.uf2"
 build_one tomkey_R3 tomkey_R3 tomkey_R3 "" "tomkey_R-seeeduino_xiao_ble-zmk.uf2"
 
