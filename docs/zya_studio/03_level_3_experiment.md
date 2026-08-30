@@ -66,6 +66,16 @@ GitHub Actionsの`dya-level-3-firmware`成果物にも同じ3ファイルを格�
 2. 実機はPeripheral（右）から`tomkey_R3`を書き込み、キー入力・トラックボール・左右接続を確認する。
 3. Central（左）へ`tomkey_L3`を書き込み、USBで接続してDYA Studioへ接続する。macOSではDYA StudioのBLE接続を使わずUSBを使う。
 4. Studioで現在のKeymap表示と既存のAML／トラックボール設定が壊れていないことを確認する。
+
+### Windows Bluetooth切断のA/B検証
+
+2026-08-30時点のLevel 3中央側では、Windows GATT相性候補を切り分けるため、次を明示的に無効化している。
+
+```text
+CONFIG_BT_GATT_ENFORCE_SUBSCRIPTION=n
+```
+
+これは安定版には適用していない。Sleep（`CONFIG_ZMK_SLEEP`）とStudioロック（`CONFIG_ZMK_STUDIO_LOCKING`）はLevel 3では無効であり、約10分の切断をそれらで説明する設定にはなっていない。比較時はWindows側でtomkeyを削除して再ペアリングした後、5・10・15・20分時点の入力とStudio接続状態を記録する。
 5. runtime Comboを1スロットだけ作成し、短いタイムアウトと既存キー位置で試す。保存前の一時変更と再起動後の永続化を分けて確認する。
 6. runtime Macroは作成・編集・保存を確認する。現行keymapにはまだ`&rmacro`の実行キーを追加していないため、実行確認は専用keymapを用意する次段階まで保留する。
 7. Input Streamは接続・アンロック後に短時間だけ有効化し、切断前に停止する。モジュール既知の切断時workqueue問題を避ける。
