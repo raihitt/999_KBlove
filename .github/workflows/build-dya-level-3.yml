@@ -1,0 +1,45 @@
+name: Build DYA Studio Level 3 firmware
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/build-dya-level-3.yml"
+      - "config/boards/shields/tomkey/**"
+      - "config/boards/shields/tomkey_level3/**"
+      - "config/experimental/**"
+      - "config/tomkey*.keymap"
+      - "config/west-dya-level-3.yml"
+      - "scripts/dya-local-build.sh"
+  pull_request:
+    paths:
+      - ".github/workflows/build-dya-level-3.yml"
+      - "config/boards/shields/tomkey/**"
+      - "config/boards/shields/tomkey_level3/**"
+      - "config/experimental/**"
+      - "config/tomkey*.keymap"
+      - "config/west-dya-level-3.yml"
+      - "scripts/dya-local-build.sh"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Level 3 firmware
+    runs-on: ubuntu-latest
+    container:
+      image: zmkfirmware/zmk-build-arm:stable
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Central and Peripheral UF2 files
+        run: ./scripts/dya-local-build.sh
+
+      - name: Upload Level 3 firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: dya-level-3-firmware
+          path: .dya-local/level-3/firmware/*.uf2
+          if-no-files-found: error

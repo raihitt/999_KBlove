@@ -1,0 +1,18 @@
+diff --git a/dts/bindings/pixart,pmw3610.yml b/dts/bindings/pixart,pmw3610.yml
+--- a/dts/bindings/pixart,pmw3610.yml
++++ b/dts/bindings/pixart,pmw3610.yml
+@@ -4 +4 @@
+-compatible: "pixart,pmw3610"
++compatible: "pixart,pmw3610-zmk"
+diff --git a/src/pmw3610.c b/src/pmw3610.c
+--- a/src/pmw3610.c
++++ b/src/pmw3610.c
+@@ -7 +7 @@
+-#define DT_DRV_COMPAT pixart_pmw3610
++#define DT_DRV_COMPAT pixart_pmw3610_zmk
+diff --git a/Kconfig b/Kconfig
+--- a/Kconfig
++++ b/Kconfig
+@@ -12 +12 @@
+-  depends on DT_HAS_PIXART_PMW3610_ENABLED
++  depends on DT_HAS_PIXART_PMW3610_ZMK_ENABLED

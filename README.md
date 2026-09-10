@@ -63,6 +63,19 @@
 - config/boards/shields/tomkey/tomkey_L.conf
 - `CONFIG_ZMK_DONGLE_DISPLAY_MAC_MODIFIERS=n`にする
 
+## DYA Studio について
+
+- DYA Studio は [https://studio.dya.cormoran.works/](https://studio.dya.cormoran.works/) から利用できます
+- tomkey では左手 `tomkey_L` が Central、右手 `tomkey_R` が Peripheral です
+- 有線でDYA Studioを使う場合は、左手Central側をUSBでPCに接続してください
+- macOSではDYA StudioのBLE接続を使わず、USB接続を使用してください
+- Level 3の実験機能は `docs/zya_studio/03_level_3_experiment.md` に分離しています
+- ローカルFWビルドは `./scripts/dya-local-build.sh` で行えます
+- GitHub Actions の `Build DYA Studio Level 3 firmware` から、従来の書き込み手順で扱えるLevel 3用の設定リセット・左手Central・右手PeripheralのUF2を取得できます
+- 注意: `settings_reset-seeeduino_xiao_ble-zmk.uf2` は設定消去専用で、DYAマクロ／コンボ機能は含みません。機能確認時は、Level 3用の左手・右手UF2を両方書き込んでください
+- 安定版へ戻す場合は、`Build ZMK firmware`の最後に成功した成果物を使用してください（詳細は `docs/zya_studio/03_level_3_experiment.md`）
+- Windows Bluetooth切断のA/B検証として、Level 3中央側だけGATT通知購読の強制を無効化しています。安定版には適用していません。比較時は同じWindows環境で変更前後を試してください
+
 ## キーマップについて
 
 - 変更着手前に `docs/roadmap/roadmap.md` を確認してください

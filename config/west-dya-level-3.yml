@@ -1,0 +1,142 @@
+# Experimental DYA Studio Level 3 manifest.
+# Keep this opt-in until the upstream feature set and tomkey hardware build
+# are verified. The stable config/west.yml is intentionally unchanged.
+manifest:
+  remotes:
+    - name: cormoran
+      url-base: https://github.com/cormoran
+    - name: badjeff
+      url-base: https://github.com/badjeff
+    - name: pukuhei
+      url-base: https://github.com/pukuhei
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+  projects:
+    - name: zmk-west-commands
+      remote: cormoran
+      import: true
+      revision: v1.0.0
+    - name: zmk
+      remote: cormoran
+      revision: main+dya
+      import:
+        file: app/west.yml
+        # The nRF52840 build does not need the imported STM32 HAL project.
+        name-blocklist:
+          - hal_stm32
+          - nanopb
+    # main+dya uses the newer Zephyr tree, as in cormoran's sample manifest.
+    - name: zephyr
+      remote: cormoran
+      revision: v4.1.0+zmk-fixes+nrf-half-duplex-uart
+      clone-depth: 1
+      import:
+        name-blocklist:
+          - ci-tools
+          - hal_altera
+          - hal_cypress
+          - hal_infineon
+          - hal_microchip
+          - hal_nxp
+          - hal_openisa
+          - hal_xtensa
+          - hal_stm32
+          - hal_st
+          - hal_ti
+          - loramac-node
+          - mcuboot
+          - mcumgr
+          - net-tools
+          - openthread
+          - edtt
+          - trusted-firmware-m
+          # Not used by the xiao_ble/nRF52840 build.
+          - acpica
+          - babblesim
+          - babblesim_base
+          - bsim
+          - cmsis-dsp
+          - cmsis-nn
+          - cmsis_6
+          - fatfs
+          - hal_adi
+          - hal_ambiq
+          - hal_atmel
+          - hal_espressif
+          - hal_ethos_u
+          - hal_gigadevice
+          - hal_intel
+          - hal_nuvoton
+          - hal_quicklogic
+          - hal_renesas
+          - hal_rpi_pico
+          - hal_silabs
+          - hal_tdk
+          - hal_telink
+          - hal_wch
+          - hal_wurthelektronik
+          - hostap
+          - liblc3
+          - libmctp
+          - libmetal
+          - littlefs
+          - mipi-sys-t
+          - canopennode
+          - chre
+          - lz4
+          - nrf_hw_models
+          - nrf_wifi
+          - open-amp
+          - percepio
+          - psa-arch-tests
+          - segger
+          - sof
+          - tf-m-tests
+          - tflite-micro
+          - trusted-firmware-a
+          - uoscore-uedhoc
+    - name: zmk-feature-custom-settings
+      remote: cormoran
+      revision: main
+    - name: zmk-feature-fast-keymap
+      remote: cormoran
+      revision: main
+    - name: zmk-feature-runtime-macro
+      remote: cormoran
+      revision: main
+    - name: zmk-feature-runtime-combo
+      remote: cormoran
+      revision: main
+    # Keep the Level 3 trackball implementation aligned with the stable build.
+    # Its compatible is namespaced by dya-local-build.sh because Zephyr 4.1
+    # also ships a different pixart,pmw3610 driver.
+    - name: zmk-pmw3610-driver
+      remote: badjeff
+      revision: zmk-0.3
+    - name: zmk-feature-input-stream
+      remote: cormoran
+      revision: main
+    - name: zmk-feature-module-physical-layout
+      remote: cormoran
+      revision: main
+    # Required by ZMK Studio RPC; optional Zephyr projects stay excluded.
+    - name: nanopb
+      remote: zephyrproject-rtos
+      revision: 7307ce399b81ddcb3c3a5dc862c52d4754328d38
+      path: modules/lib/nanopb
+      clone-depth: 1
+    # BLE management remains compatible with main+dya and is kept for Level 3.
+    - name: zmk-module-ble-management
+      remote: cormoran
+      revision: main
+    - name: zmk-module-runtime-input-processor
+      remote: cormoran
+      revision: main
+    # Current pukuhei display module for the newer Zephyr/ZMK tree.
+    - name: zmk-tom-oled
+      remote: pukuhei
+      revision: main
+  self:
+    path: config
+  # Do not enable Zephyr's optional test/audio stacks for this nRF52840 build.
+  group-filter: [-optional]

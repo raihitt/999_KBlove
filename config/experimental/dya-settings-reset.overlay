@@ -1,0 +1,4 @@
+/* Keep the Level 3 settings-reset build compatible with cormoran's Zephyr 4.1 UART patch. */
+&uart0 {
+    half-duplex;
+};
